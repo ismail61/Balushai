@@ -1,4 +1,4 @@
-import { error } from "./error";
+import error from "./error";
 
 export default (fn) => {
     return async (req, res, next) => {

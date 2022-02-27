@@ -1,29 +1,29 @@
-import { connect } from 'mongoose';
-import { db } from '../../../config/index'
+import mongoose from 'mongoose';
+import { config } from '../../../config/index'
 
 export const connectToDatabase = async () => {
+
   // Mongoose Connection Information
-  const { connection } = await connect(db.url, {
+  mongoose.connect(config.db.url, {
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true,
     // reconnectTries: Number.MAX_VALUE,
     // reconnectInterval: 1000
-  });
+  })
 
-  connection.on('connected', () => {
+  mongoose.connection.on('connected', () => {
     console.info('Success! Connected to Database.');
   });
 
-  connection.on('disconnected', () => {
+  mongoose.connection.on('disconnected', () => {
     console.error('!!!!!!!!!! Database Disconnected !!!!!!!!!!');
   });
 
-  connection.on('reconnected', () => {
+  mongoose.connection.on('reconnected', () => {
     console.warn('!!!!!!!!!! Database Reconnected  !!!!!!!!!!');
   });
 
-  connection.on('error', (error) => {
+  mongoose.connection.on('error', (error) => {
     console.error('Failed! Database connection failed. \n', error);
   });
 };
