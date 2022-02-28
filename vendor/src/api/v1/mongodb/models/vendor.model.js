@@ -194,13 +194,22 @@ const vendorSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    activated: {
+    isActive: {
         type: Boolean,
-        default: false
+        default: false,
+        index : true
     },
-    token : {
+    token: {
         type: String,
-    }
+    },
+    products: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product',
+            }
+        }
+    ]
 }, {
     toJSON: {
         transform(doc, ret) {
@@ -212,5 +221,7 @@ const vendorSchema = new mongoose.Schema({
     },
     timestamps: true
 });
+
+vendorSchema.index({products : 1})
 
 export default mongoose.model("Vendor", vendorSchema);

@@ -45,7 +45,21 @@ const productSchema = mongoose.Schema({
         width: String,
         height: String,
     },
-    dangerous_goods: String
+    dangerous_goods: String,
+    vendor_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vendor',
+        required: true
+    },
+    orders: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Order',
+            }
+        }
+    ]
+
 })
 
 

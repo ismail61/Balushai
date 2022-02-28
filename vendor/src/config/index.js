@@ -1,10 +1,13 @@
-const { PORT, DB_URL } = process.env
+const { PORT, DB_URL , JWT_SECRET_KEY } = process.env
 const config = {
     app: {
-        port: parseInt(PORT) || 7890
+        port: parseInt(PORT)
     },
     db: {
         url: DB_URL
+    },
+    jwt: {
+        key: JWT_SECRET_KEY
     }
 };
 
