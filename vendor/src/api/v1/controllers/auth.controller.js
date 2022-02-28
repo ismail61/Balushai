@@ -9,8 +9,8 @@ function authController() {
 
         signIn: async (req, res) => {
             const { email, password } = req.body;
-            const validator = signInValidation(email, password);
-            if (validator.error) return error().resourceError(res, validator.error?.details[0].message, 422);
+            const validation = signInValidation(email, password);
+            if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             const vendor = await findVendorUsingEmail({ "seller_account.email": email });
             if (!vendor) return error().resourceError(res, 'Invalid Credentials', 401);
