@@ -11,6 +11,7 @@ export const vendorAuthentication = async (req, res, next) => {
     }
     try {
         const token = req.headers.authorization.split(' ')[1];
+        console.log(token)
         const verify_token = await jwt.verify(token, config.jwt.key);
         const vendor = await findVendorUsingIdAndToken({ _id: verify_token._id, token: verify_token.verifyToken })
         if (!vendor) return res.status(401).send("Invalid Token");

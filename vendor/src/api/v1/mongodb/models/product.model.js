@@ -46,6 +46,19 @@ const productSchema = mongoose.Schema({
         height: String,
     },
     dangerous_goods: String,
+    status: {
+        type: String,
+        enum: ['approved', 'pending', 'rejected'],
+        default: 'pending'
+    },
+    is_deleted: {
+        type: Boolean,
+        default: false
+    },
+    is_active: {
+        type: Boolean,
+        default: true
+    },
     vendor_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Vendor',
@@ -56,6 +69,14 @@ const productSchema = mongoose.Schema({
             _id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Order',
+            }
+        }
+    ],
+    reviews: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Review',
             }
         }
     ]

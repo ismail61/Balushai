@@ -35,8 +35,8 @@ function authController() {
             const validation = signUpValidation(req.body);
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
             //find a user is assigned to the same email or phone
-            const user = await findVendorUsingEmailOrPhoneNumberOrShopName({ $or: [{ "seller_account.email": email }, { "seller_account.phone": phone }, { "seller_account.shop_name": shop_name }] });
-            if (user) return error().resourceError(res, 'Email or Phone Number already exists. Please choose a different Email or Phone Number', 409);
+            // const user = await findVendorUsingEmailOrPhoneNumberOrShopName({ $or: [{ "seller_account.email": email }, { "seller_account.phone": phone }, { "seller_account.shop_name": shop_name }] });
+            // if (user) return error().resourceError(res, 'Email or Phone Number already exists. Please choose a different Email or Phone Number', 409);
 
             const shop_name_checker = await findVendorUsingShopName({ "seller_account.shop_name": shop_name });
             if (shop_name_checker) return error().resourceError(res, 'Please choose a different Shop Name', 409);
