@@ -197,7 +197,7 @@ const vendorSchema = new mongoose.Schema({
     is_active: {
         type: Boolean,
         default: false,
-        index : true
+        index: true
     },
     token: {
         type: String,
@@ -210,8 +210,8 @@ const vendorSchema = new mongoose.Schema({
             }
         }
     ],
-    image : {
-        type: String
+    image: {
+        url: String
     }
 }, {
     toJSON: {
@@ -225,7 +225,7 @@ const vendorSchema = new mongoose.Schema({
     timestamps: true
 });
 
-vendorSchema.index({products : 1})
-vendorSchema.index({isActive : 1})
+vendorSchema.index({ products: 1 })
+vendorSchema.index({ isActive: 1 })
 
 export default mongoose.model("Vendor", vendorSchema);

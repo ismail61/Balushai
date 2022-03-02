@@ -11,31 +11,28 @@ const numberRequired = {
     required: true
 }
 
+//PriceSchema
+const priceSchema = new mongoose.Schema({
+    price: numberRequired,
+    special_price: Number,
+    offer_price: Number
+})
+
 // variant stock price combine schema
 const variant_stock_priceSchema_with_color_and_size = new mongoose.Schema({
     color: [{
         color_family: String,
-        image: [String],
+        image: [
+            {
+                url: String
+            }
+        ],
         _size: [{
             size: mongoose.Schema.Types.Mixed,
-            price: {
-                type: Number,
-                required: () => {
-                    if (this.color_family?.length > 0) {
-                        return true;
-                    }
-                    return false;
-                }
-            },
-            special_price: Number,
+            pricing: priceSchema,
             quantity: {
                 type: Number,
-                required: () => {
-                    if (this.color_family?.length > 0) {
-                        return true;
-                    }
-                    return false;
-                }
+                required: true
             },
             seller_sku: {
                 type: String,
@@ -60,25 +57,15 @@ const variant_stock_priceSchema_with_color = new mongoose.Schema({
             default: true
         },
         color_family: String,
-        image: [String],
-        price: {
-            type: Number,
-            required: () => {
-                if (this.color_family?.length > 0) {
-                    return true;
-                }
-                return false;
+        image: [
+            {
+                url: String
             }
-        },
-        special_price: Number,
+        ],
+        pricing: priceSchema,
         quantity: {
             type: Number,
-            required: () => {
-                if (this.color_family?.length > 0) {
-                    return true;
-                }
-                return false;
-            }
+            required: true
         },
         seller_sku: {
             type: String,
@@ -89,15 +76,19 @@ const variant_stock_priceSchema_with_color = new mongoose.Schema({
         free_items: String,
     }],
 })
+
 // variant stock price combine schema
 const variant_stock_priceSchema_without_color = new mongoose.Schema({
-    image: [String],
+    image: [
+        {
+            url: String
+        }
+    ],
     availability: {
         type: Boolean,
         default: true
     },
-    price: numberRequired,
-    special_price: Number,
+    pricing: priceSchema,
     quantity: numberRequired,
     seller_sku: {
         type: String,
