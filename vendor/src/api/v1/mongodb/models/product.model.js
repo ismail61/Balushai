@@ -129,9 +129,9 @@ const productSchema = mongoose.Schema({
         ...stringRequired,
         maxLength: 255
     },
-    variant_stock_price_with_color_and_size: [variant_stock_priceSchema_with_color_and_size],
-    variant_stock_price_with_color: [variant_stock_priceSchema_with_color],
-    variant_stock_price_without_color: [variant_stock_priceSchema_without_color],
+    // variant_stock_price_with_color_and_size: [variant_stock_priceSchema_with_color_and_size],
+    // variant_stock_price_with_color: [variant_stock_priceSchema_with_color],
+    // variant_stock_price_without_color: [variant_stock_priceSchema_without_color],
     warranty_type: String,
     warranty_period: String,
     warranty_policy: String,

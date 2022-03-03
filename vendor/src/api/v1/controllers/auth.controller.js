@@ -1,4 +1,4 @@
-import { createVendor, findVendorUsingEmail, findVendorUsingShopName } from "../services"
+import { createVendor, findVendorUsingEmail, findVendorUsingEmailOrPhoneNumber, findVendorUsingShopName } from "../services"
 import { findVendorByIDAndUpdate } from "../services/account.services"
 import { error, generateToken, generateTokenTracker, passwordCompare, validatorEscape } from "../utils"
 import { signInValidation, signUpValidation } from "../validations"
@@ -35,7 +35,7 @@ function authController() {
             const validation = signUpValidation(req.body);
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
             //find a user is assigned to the same email or phone
-            const user = await findVendorUsingEmailOrPhoneNumberOrShopName({ $or: [{ "seller_account.email": email }, { "seller_account.phone": phone }, { "seller_account.shop_name": shop_name }] });
+            const user = await findVendorUsingEmailOrPhoneNumber({ $or: [{ "seller_account.email": email }, { "seller_account.phone": phone }, { "seller_account.shop_name": shop_name }] });
             if (user) return error().resourceError(res, 'Email or Phone Number already exists. Please choose a different Email or Phone Number', 409);
 
             const shop_name_checker = await findVendorUsingShopName({ "seller_account.shop_name": shop_name });

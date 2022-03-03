@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { addProduct, findProduct, getProducts, updateProduct } from "../services/product.services";
-import { error } from '../utils';
+import { error, validatorEscape } from '../utils';
 import { productValidation } from '../validations';
 
 function productController() {
@@ -8,7 +8,11 @@ function productController() {
 
         // Add product
         addProduct: async (req, res) => {
-            const validation = productValidation(req.body);
+            //malicious data refactor
+            // const refactor_data = await validatorEscape(req.body); 
+            // Can not use refactor here. Nested object exist.
+            
+            // const validation = productValidation(req.body);
             // if(validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
             const addedProduct = await addProduct(req.body)
             res.status(200).json(addedProduct);
