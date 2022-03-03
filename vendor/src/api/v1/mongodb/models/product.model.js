@@ -1,4 +1,5 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
+
 // String type & required
 const stringRequired = {
     type: String,
@@ -10,176 +11,118 @@ const numberRequired = {
     type: Number,
     required: true
 }
-
-// variant stock price combine schema
-const variant_stock_priceSchema_with_color_and_size = new mongoose.Schema({
-    color: [{
-        color_family: String,
-        image: [String],
-        _size: [{
-            size: mongoose.Schema.Types.Mixed,
-            price: {
-                type: Number,
-                required: () => {
-                    if (this.color_family?.length > 0) {
-                        return true;
-                    }
-                    return false;
-                }
-            },
-            special_price: Number,
-            quantity: {
-                type: Number,
-                required: () => {
-                    if (this.color_family?.length > 0) {
-                        return true;
-                    }
-                    return false;
-                }
-            },
-            seller_sku: {
-                type: String,
-                maxLength: 200,
-                unique: true,
-                index: true
-            },
-            free_items: String
-        }],
-        availability: {
-            type: Boolean,
-            default: true
-        }
-    }],
-})
-
-// variant stock price combine schema
-const variant_stock_priceSchema_with_color = new mongoose.Schema({
-    color: [{
-        availability: {
-            type: Boolean,
-            default: true
-        },
-        color_family: String,
-        image: [String],
-        price: {
-            type: Number,
-            required: () => {
-                if (this.color_family?.length > 0) {
-                    return true;
-                }
-                return false;
-            }
-        },
-        special_price: Number,
-        quantity: {
-            type: Number,
-            required: () => {
-                if (this.color_family?.length > 0) {
-                    return true;
-                }
-                return false;
-            }
-        },
-        seller_sku: {
-            type: String,
-            maxLength: 200,
-            unique: true,
-            index: true
-        },
-        free_items: String,
-    }],
-})
-// variant stock price combine schema
-const variant_stock_priceSchema_without_color = new mongoose.Schema({
-    image: [String],
-    availability: {
-        type: Boolean,
-        default: true
-    },
-    price: numberRequired,
-    special_price: Number,
-    quantity: numberRequired,
-    seller_sku: {
-        type: String,
-        maxLength: 200,
-        unique: true,
+const ProductSchema = new mongoose.Schema({
+    product_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
         index: true
     },
-    free_items: String
+    vendor_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Vendor',
+        required: true,
+        index: true
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        max: 5
+    },
+    price: {
+        type: Number,
+        required: true
+    }
+});
+
+
+// Delivery information
+const AddressSchema = mongoose.Schema({
+    full_name: stringRequired,
+    phone_number: numberRequired,
+    region: stringRequired,
+    city: stringRequired,
+    area: stringRequired,
+    address: stringRequired,
+    effective_delivery_label: {
+        type: String,
+        enum: ['OFFICE', 'HOME'],
+        default: 'HOME'
+    },
 })
 
 
-
-// Product Schema here
-const productSchema = mongoose.Schema({
-    product_name: stringRequired,
-    category: stringRequired,
-    video_url: String,
-    brand: stringRequired,
-    short_description: stringRequired,
-    long_description: {
-        description: String,
-        image: [
-            {
-                url: String
-            }
-        ]
-    },
-    whats_in_the_box: {
-        ...stringRequired,
-        maxLength: 255
-    },
-    // variant_stock_price_with_color_and_size: [variant_stock_priceSchema_with_color_and_size],
-    // variant_stock_price_with_color: [variant_stock_priceSchema_with_color],
-    // variant_stock_price_without_color: [variant_stock_priceSchema_without_color],
-    warranty_type: String,
-    warranty_period: String,
-    warranty_policy: String,
-    package_weight: stringRequired,
-    package_dimensions: {
-        length: stringRequired,
-        width: stringRequired,
-        height: stringRequired,
-    },
-    dangerous_goods: String,
+// Payment information schema
+const PaymentInformationSchema = new mongoose.Schema({
+    amount: numberRequired,
+    method: stringRequired,// Baksh  or COD-> Cash on Delivery
     status: {
         type: String,
-        enum: ['APPROVED', 'PENDING', 'SUSPENDED'],
-        default: 'PENDING'
+        enum: ['PENDING', 'PAID', 'UNPAID', 'FAILED'],
+        default: 'UNPAID'
     },
-    is_deleted: {
+    /* card: {
+        brand: String,
+        number : Number
+        expirationMonth: Number,
+        expirationYear: Number,
+        cvv: Number
+    } */
+
+})
+/********************
+ * Order Schema here
+ ********************/
+const orderSchema = mongoose.Schema({
+    products: [ProductSchema],
+    /* quantity_shipped: {
+        type: Number,
+        default: 0
+    }, */
+
+    voucher_code: String,
+    subtotal: numberRequired,
+    shipping_fee: numberRequired,
+    shipping_fee_promotion: numberRequired,
+    vat: Number,
+    total: numberRequired,
+    payment_information: PaymentInformationSchema,
+    user_id: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    billing_address: AddressSchema,
+    shipping_address: AddressSchema,
+    user_order_status: {
+        type: String,
+        default: 'PAYMENT_PENDING',
+        enum: ['PAYMENT_PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELED', 'DELIVERY_FAILED']
+    },
+    vendor_order_status: {
+        type: String,
+        default: 'PENDING',
+        enum: ['PENDING', 'READY_TO_SHIP', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED', 'DELIVERY_FAILED']
+    },
+    provider: String,
+    tracking_number: String,
+    invoice_number: Number,
+    estimate_delivery_time: Date,
+    ship_on_time: Date,
+    delivered_time: Date,
+    printed: {
         type: Boolean,
         default: false
     },
-    is_active: {
-        type: Boolean,
-        default: true
-    },
-    vendor_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vendor',
-        required: true
-    },
-    orders: [
-        {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Order',
-            }
-        }
-    ],
-    reviews: [
-        {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Review',
-            }
-        }
-    ]
-
+    cancellation_reasons: String,
+    reviews: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'Review'
+    }
 }, {
-    timestamps: true,
+    timestamps: true
 })
 
 
-export default mongoose.model('Product', productSchema)
+
+export default mongoose.model('Order', orderSchema)

@@ -11,41 +11,67 @@ const numberRequired = {
     type: Number,
     required: true
 }
+const ProductSchema = new mongoose.Schema({
+    product_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    quantity_hipped: {
+        type: Number,
+        default: 0
+    },
+    price: {
+        type: Number,
+        required: true
+    }
+});
 
-// Order item schema
-const orderItemSchema = mongoose.Schema({
-    product_id: stringRequired,
-    product_name: stringRequired,
-    price: numberRequired,
-    quantity: numberRequired,
-    total_price: numberRequired 
-})
 
 // Delivery information
-const delivery_informationSchema = mongoose.Schema({
+const AddressSchema = new mongoose.Schema({
     full_name: stringRequired,
     phone_number: numberRequired,
     region: stringRequired,
-    city:stringRequired,
+    city: stringRequired,
     area: stringRequired,
     address: stringRequired,
     effective_delivery_label: {
         type: String,
-        enum : ['office','home'],
-        default: 'home'
+        enum: ['OFFICE', 'HOME'],
+        default: 'HOME'
     },
 })
 
 
 // Payment information schema
-const paymentInformationSchema = mongoose.Schema({
-    payment_method: stringRequired,
-    payment_status: {
+const PaymentInformationSchema = new mongoose.Schema({
+    amount: numberRequired,
+    method: stringRequired,
+    status: {
         type: String,
-        enum: ['paid', 'unpaid'],
+        enum: ['PENDING', 'PAID', 'UNPAID', 'FAILED'],
+        default: 'UNPAID'
+    },
+    /* card: {
+        brand: String,
+        number : Number
+        expirationMonth: Number,
+        expirationYear: Number,
+        cvv: Number
+    } */
+
+})
+//User Details 
+const UserInformationSchema = new mongoose.Schema({
+    user_id: {
+        type: Schema.Types.ObjectId,
         required: true
     }
-    
 })
 
 
@@ -53,15 +79,44 @@ const paymentInformationSchema = mongoose.Schema({
  * Order Schema here
  ********************/
 const orderSchema = mongoose.Schema({
-    delivery_information: delivery_informationSchema,
-    order_items: [orderItemSchema],
+    products: [ProductSchema],
     voucher_code: String,
-    total_items: numberRequired,
     subtotal: numberRequired,
     shipping_fee: numberRequired,
+    shipping_fee_promotion: numberRequired,
     vat: Number,
     total: numberRequired,
-    paymentInformation: paymentInformationSchema
+    payment_information: PaymentInformationSchema,
+    user_information: UserInformationSchema,
+    billing_address: AddressSchema,
+    shipping_address: AddressSchema,
+    user_order_status: {
+        type: String,
+        default: 'PENDING',
+        enum: ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELED']
+    },
+    vendor_order_status: {
+        type: String,
+        default: 'PENDING',
+        enum: ['PENDING', 'READY_TO_SHIP', 'SHIPPED', 'DELIVERED', 'CANCELLED' , 'RETURNED' , 'DELIVERY_FAILED']
+    },
+    provider: String,
+    tracking_number: String,
+    invoice_number: Number,
+    estimate_delivery_time: Date,
+    ship_on_time: Date,
+    printed: {
+        type: Boolean,
+        default: false
+    },
+    cancellation_reasons:String,
+    reviews : {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref:'Review'
+    }
+}, {
+    timestamps: true
 })
 
 
