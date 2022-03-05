@@ -13,7 +13,7 @@ const numberRequired = {
 }
 const ProductSchema = new mongoose.Schema({
     product_id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'Product',
         required: true
     },
@@ -69,7 +69,7 @@ const PaymentInformationSchema = new mongoose.Schema({
 //User Details 
 const UserInformationSchema = new mongoose.Schema({
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true
     }
 })
@@ -111,7 +111,7 @@ const orderSchema = mongoose.Schema({
     },
     cancellation_reasons:String,
     reviews : {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true,
         ref:'Review'
     }

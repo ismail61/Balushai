@@ -199,4 +199,4 @@ const orderValidation = ({ products, voucher_code, subtotal, shipping_fee, shipp
     return { value, error }
 }
 
-export default { orderValidation }
+export { orderValidation }

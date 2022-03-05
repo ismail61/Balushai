@@ -38,4 +38,4 @@ const reviewValidation = ({ description, image, rating, reply, report, status })
 }
 
 
-export default { reviewValidation }
+export { reviewValidation }

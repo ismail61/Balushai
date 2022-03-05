@@ -12,8 +12,8 @@ function productController() {
             // const refactor_data = await validatorEscape(req.body); 
             // Can not use refactor here. Nested object exist.
             
-            // const validation = productValidation(req.body);
-            // if(validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
+            const validation = productValidation(req.body);
+            if(validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
             const addedProduct = await addProduct(req.body)
             res.status(200).json(addedProduct);
         },

@@ -13,13 +13,13 @@ const numberRequired = {
 }
 const ProductSchema = new mongoose.Schema({
     product_id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'Product',
         required: true,
         index: true
     },
     vendor_id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: 'Vendor',
         required: true,
         index: true
@@ -88,7 +88,7 @@ const orderSchema = mongoose.Schema({
     total: numberRequired,
     payment_information: PaymentInformationSchema,
     user_id: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true
     },
     billing_address: AddressSchema,
@@ -115,7 +115,7 @@ const orderSchema = mongoose.Schema({
     },
     cancellation_reasons: String,
     reviews: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
         required: true,
         ref: 'Review'
     }
@@ -125,4 +125,4 @@ const orderSchema = mongoose.Schema({
 
 
 
-export default mongoose.model('Order', orderSchema)
+export default mongoose.model('Product', orderSchema)
