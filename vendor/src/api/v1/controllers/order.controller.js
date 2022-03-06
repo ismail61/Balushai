@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import { addOrder, deleteOrder, getAllOrders, getSingleOrder, updateOrder } from "../services"
+import { createOrder, deleteOrder, getAllOrders, getSingleOrder, updateOrder } from "../services"
 import { error } from "../utils"
 import { orderValidation } from "../validations"
 
@@ -7,10 +7,10 @@ const orderController = () => {
     return {
 
         // Add order
-        addOrder: async (req, res) => {
-            const validation = orderValidation(req.body)
-            if(validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
-            const addedOrder = await addOrder(req.body)
+        createOrder: async (req, res) => {
+            // const validation = orderValidation(req.body)
+            // if(validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
+            const addedOrder = await createOrder(req.body)
             res.status(200).json(addedOrder);
         },
 

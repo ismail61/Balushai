@@ -44,4 +44,4 @@
 })
 
 
-export default mongoose.model('Review', orderSchema)
+export default mongoose.model('Review', reviewSchema)

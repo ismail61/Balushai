@@ -1,6 +1,6 @@
 import { Order } from "../mongodb/models"
 
-export const addOrder = async () => {
+export const createOrder = async (data) => {
     try {
         const newOrder = await new Order(data)
         return await newOrder.save()

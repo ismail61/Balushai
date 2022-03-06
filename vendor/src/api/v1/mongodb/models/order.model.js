@@ -112,7 +112,7 @@ const orderSchema = mongoose.Schema({
     cancellation_reasons:String,
     reviews : {
         type: mongoose.Types.ObjectId,
-        required: true,
+        // required: true,
         ref:'Review'
     }
 }, {

@@ -197,7 +197,7 @@ const vendorSchema = new mongoose.Schema({
     is_active: {
         type: Boolean,
         default: false,
-        index : true
+        index: true
     },
     token: {
         type: String,
@@ -207,25 +207,49 @@ const vendorSchema = new mongoose.Schema({
             _id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Product',
-            }
+            },
         }
     ],
-    image : {
-        type: String
+    orders: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Order',
+            },
+        }
+    ],
+    image: {
+        url: String
+    },
+    /* seller_rating: { // like 90%
+        type: Number,
+        default: 0
+    }, */
+    ship_on_time: { // like 90%
+        type: Number,
+        default: 0
+    },
+    chat_response_rate: { // like 90%
+        type: Number,
+        default: 0
+    },
+    followers: {
+        type: Number,
+        default: 0
     }
 }, {
     toJSON: {
         transform(doc, ret) {
             delete ret.password,
-                delete ret.__v,
-                delete ret.createdAt,
-                delete ret.updatedAt
+            delete ret.__v,
+            delete ret.createdAt,
+            delete ret.updatedAt
         }
     },
     timestamps: true
 });
 
-vendorSchema.index({products : 1})
-vendorSchema.index({isActive : 1})
+/* vendorSchema.index({ 'products._id': 1, 'orders._id': 1 }) */
+/* vendorSchema.index({ is_active: 1 }) */
 
 export default mongoose.model("Vendor", vendorSchema);
