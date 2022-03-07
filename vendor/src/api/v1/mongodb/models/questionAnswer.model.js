@@ -20,7 +20,8 @@ const questionAnswerSchema = mongoose.Schema({
     vendor_id: {
         _id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Vendor'
+            ref: 'Vendor',
+            required: true
         }
     },
     user_mesage: String,

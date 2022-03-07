@@ -3,7 +3,7 @@ import { getNestedProperty } from "../utils";
 
 export const findVendorByIDAndUpdate = async (id, data) => {
     try {
-        return await Vendor.findOneAndUpdate(id, data, { new: true });
+        return await Vendor.findOneAndUpdate({_id: id}, data, { new: true });
     } catch (err) {
         console.log(err);
     }

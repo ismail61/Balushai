@@ -11,12 +11,10 @@ export const vendorAuthentication = async (req, res, next) => {
     }
     try {
         const token = req.headers.authorization.split(' ')[1];
+        console.log(token)
         const verify_token = await jwt.verify(token, config.jwt.key);
-        console.log(verify_token)
-        // { $and: [{ _id: req.params?._id }, { vendor_id: req.user?._id }] }
-        const vendor = await findVendorUsingIdAndToken({$and: [{ _id: verify_token._id}, {token: verify_token.verifyToken }]})
-        // const vendor = await findVendorUsingIdAndToken({ _id: verify_token._id})
-        if (!vendor) return res.status(401).send("Invalid Token.");
+        const vendor = await findVendorUsingIdAndToken({ _id: verify_token._id, token: verify_token.verifyToken })
+        if (!vendor) return res.status(401).send("Invalid Token");
         if (vendor?.is_active === false) return res.json({ err: 'Your account has not been activated. Please contact Admin or Administrator' })
         req.user = verify_token;
     } catch (err) {
