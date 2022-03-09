@@ -65,7 +65,7 @@ const voucherValidation = ({
             }),
     })
 
-    return { value, error } = joiSchema.validate({
+    const { value, error } = joiSchema.validate({
         name,
         start_from,
         end_time,
@@ -75,7 +75,11 @@ const voucherValidation = ({
         max_amount_to_apply,
         total_issued_voucher,
         limit_voucher_usage_for_customer
+    }, {
+        escapeHtml: true 
     })
+
+    return { value, error }
 }
 
 export { voucherValidation }

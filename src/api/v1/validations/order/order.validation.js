@@ -1,8 +1,27 @@
 import Joi from "joi";
 
-const orderValidation = ({ products, voucher_code, shipment_fee, payment_information, billing_address, shipment_address, provider, tracking_number, invoice_number, estimate_delivery_time, ship_on_time, cancellation_reasons }) => {
+const orderValidation = ({ 
+    product,
+    total_price,
+    shipment_fee,
+    seller_discount,
+    total,
+    payment_information,
+    billing_address,
+    shipment_address,
+    user_order_status,
+    vendor_order_status,
+    provider,
+    tracking_number,
+    invoice_number,
+    estimate_delivery_time,
+    delivered_time,
+    printed,
+    cancellation_reasons,
+    refunds
+}) => {
     const joiSchema = Joi.object().keys({
-        products: Joi.array().items({
+        product: Joi.object().keys({
             quantity: Joi.number().required()
                 .messages({
                     "number.base": `Quantity should be type of Number`,
@@ -15,14 +34,29 @@ const orderValidation = ({ products, voucher_code, shipment_fee, payment_informa
                     "any.required": `Price is Required.`
                 }),
         }),
-        voucher_code: Joi.string()
+        total_price: Joi.number().required()
             .messages({
-                "string.base": `Voucher Code should be type of String`
+                "number.base": `Total Price should be type of Number`,
+                "any.required": `Total Price is Required.`
             }),
+        
+        // voucher_code: Joi.string()
+        //     .messages({
+        //         "string.base": `Voucher Code should be type of String`
+        //     }),
         shipment_fee: Joi.number().required()
             .messages({
                 "number.base": `Shipment Fee should be type of Number`,
                 "any.required": `Shipment Fee is Required.`
+            }),
+        seller_discount: Joi.number()
+            .messages({
+                "number.base": `Seller Discount should be type of Number`
+            }),
+        total: Joi.number().required()
+            .messages({
+                "number.base": `Total should be type of Number`,
+                "any.required": `Total is Required.`
             }),
         payment_information: Joi.object().keys({
             amount: Joi.number().required()
@@ -132,6 +166,26 @@ const orderValidation = ({ products, voucher_code, shipment_fee, payment_informa
                     "string.base": `Effective Delivery Label should be type of String`
                 })
         }),
+        user_order_status: Joi.string().valid('PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELED', 'RETURNED', 'DELIVERY_FAILED')
+            .messages({
+                "string.base": `User Order Status should be type of String`
+            }),
+        
+        vendor_order_status: Joi.string().valid('PENDING', 'READY_TO_SHIP', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED', 'DELIVERY_FAILED')
+            .messages({
+                "string.base": `Vendor Order Status should be type of String`
+            }),
+        provider: Joi.object().keys({
+            drop_off: Joi.string()
+                .messages({
+                    "string.base": `Drop Off should be type of String`
+                }),
+            delivery: Joi.string()
+                .messages({
+                    "string.base": `Delivery should be type of String`
+                })
+        }),
+        
         tracking_number: Joi.string()
             .messages({
                 "string.base": `Tracking Number should be type of String`
@@ -144,18 +198,47 @@ const orderValidation = ({ products, voucher_code, shipment_fee, payment_informa
             .messages({
                 "date.base": `Estimate Delivery Time should be type of Date`
             }),
-        ship_on_time: Joi.date()
+        delivered_time: Joi.date()
             .messages({
-                "date.base": `Ship Delivery Time should be type of Date`
+                "date.base": `Delivery Time should be type of Date`
+            }),
+        printed: Joi.boolean()
+            .messages({
+                "boolean.base": `Printed should be type of Boolean`
             }),
         cancellation_reasons: Joi.string()
             .messages({
                 "string.base": `Cancellation Reasons should be type of String`
+            }),
+        refunds: Joi.number()
+            .messages({
+                "number.base": `Refunds should be type of Number`
             })
 
     })
 
-    const { value, error } = joiSchema.validate({ products, voucher_code, shipment_fee, payment_information, billing_address, shipment_address, provider, tracking_number, invoice_number, estimate_delivery_time, ship_on_time, cancellation_reasons }, { escapeHtml: true })
+    const { value, error } = joiSchema.validate({ 
+        product,
+        total_price,
+        shipment_fee,
+        seller_discount,
+        total,
+        payment_information,
+        billing_address,
+        shipment_address,
+        user_order_status,
+        vendor_order_status,
+        provider,
+        tracking_number,
+        invoice_number,
+        estimate_delivery_time,
+        delivered_time,
+        printed,
+        cancellation_reasons,
+        refunds
+    }, { 
+        escapeHtml: true 
+    })
     return { value, error }
 }
 

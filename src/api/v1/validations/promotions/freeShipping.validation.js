@@ -56,7 +56,16 @@ const freeShippingValidation = ({ name, period, condition, regions }) => {
         }),
     })
 
-    return { value, error } = joiSchema.validate({ name, period, condition, regions })
+    const { value, error } = joiSchema.validate({ 
+        name, 
+        period, 
+        condition, 
+        regions 
+    }, { 
+        escapeHtml: true 
+    })
+
+    return { value, error }
 }
 
 export { freeShippingValidation }

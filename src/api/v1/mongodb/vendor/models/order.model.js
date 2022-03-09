@@ -126,7 +126,7 @@ const orderSchema = new mongoose.Schema({
             ref: 'Review',
         },
     },
-    Refunds: Number
+    refunds: Number
 }, {
     timestamps: true
 })
