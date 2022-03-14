@@ -30,9 +30,9 @@ export const getProduct = async (query) => {
     }
 }
 
-export const getProducts = async (query) => {
+export const getAllProducts = async (query) => {
     try {
-        return await Product.find(query)
+        return await Product.find(query);
     } catch (err) {
         console.log(err)
     }
@@ -105,3 +105,113 @@ export const sellerSKUCheck = async (body) => {
     })
     return res;
 }
+
+// Filter Product
+getProducts: async (req, res) => {
+    const Cg = req.query.Cg
+    const filter = req.query.filter
+    const from = req.query.from
+    const to = req.query.to
+    const keyword = req.query.keyword ? {
+        name : {
+            $regex : req.query.keyword,
+            $options : 'i'
+        }
+    } : {}
+    
+    console.log(req.query.keyword)
+
+    if(Cg){
+        const products =  await Product.find({category : Cg});
+        res.json(products)
+
+    }
+    else if(filter){
+        switch (filter) {
+            case 'Rating':
+                const productsbyrating =  await Product.find({}).sort('-rating').exec();
+                res.json(productsbyrating)
+
+                break;
+            case 'date':
+                const productsbydate =  await Product.find({}).sort('createdAt').exec();
+                res.json(productsbydate)
+                    break;
+            case 'highprice':
+                const productsbyhighprice =  await Product.find({}).sort('price');
+                res.json(productsbyhighprice)
+                    break;
+            case 'lowprice':
+                const productsbylowprice =  await Product.find({}).sort('-price').exec();
+                res.json(productsbylowprice)
+                    break;
+            case 'brand':
+                const productbyservices = await P
+        
+            default:
+                break;
+        }
+    }else if(from && to){
+        const productbyprice =  await Product.find({price:{$lte:to},price:{$gte:from}});
+        res.json(productbyprice)
+
+    }else{
+        const products =  await Product.find({...keyword});
+        res.json(products)
+
+    }
+}
+
+/* export const getProducts = asyncHandler(async (req, res) => {
+    const Cg = req.query.Cg
+    const filter = req.query.filter
+    const from = req.query.from
+    const to = req.query.to
+    const keyword = req.query.keyword ? {
+        name : {
+            $regex : req.query.keyword,
+            $options : 'i'
+        }
+    } : {}
+    
+    console.log(req.query.keyword)
+
+    if(Cg){
+        const products =  await Product.find({category : Cg});
+        res.json(products)
+
+    }
+    else if(filter){
+        switch (filter) {
+            case 'Rating':
+                const productsbyrating =  await Product.find({}).sort('-rating').exec();
+                res.json(productsbyrating)
+
+                break;
+            case 'date':
+                const productsbydate =  await Product.find({}).sort('createdAt').exec();
+                res.json(productsbydate)
+                    break;
+            case 'highprice':
+                const productsbyhighprice =  await Product.find({}).sort('price');
+                res.json(productsbyhighprice)
+
+                    break;
+            case 'lowprice':
+                const productsbylowprice =  await Product.find({}).sort('-price').exec();
+                res.json(productsbylowprice)
+                    break;
+
+            default:
+                break;
+        }
+    }else if(from && to){
+        const productbyprice =  await Product.find({price:{$lte:to},price:{$gte:from}});
+        res.json(productbyprice)
+
+    }else{
+        const products =  await Product.find({...keyword});
+        res.json(products)
+
+    }
+}) */
