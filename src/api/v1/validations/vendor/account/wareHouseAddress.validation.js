@@ -10,7 +10,7 @@ const wareHouseAddressValidation = ({ name, address, phone, city_or_town, countr
                 "string.base": `Warehouse Address should be a type of String`,
                 "any.required": `Warehouse Address is Required.`,
             }),
-        phone: Joi.string().regex(/(^(\+8801|8801|01|008801))[1|5-9]{1}(\d){8}$/).required()
+        phone: Joi.string().regex(/^(?:\+88|88)?(01[3-9]\d{8})$/).required()
             .messages({
                 "string.base": `Phone should be a type of Number`,
                 "string.pattern.base": `Please Enter the Valid BD Phone number! `,

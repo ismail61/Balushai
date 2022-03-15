@@ -89,13 +89,15 @@ const productValidation = ({
             width: Joi.number().required()
                 .messages({
                     "number.base": `Width should be type of Number`,
-                    "any.required": `Width Weight is Required.`
+                    "any.required": `Width is Required.`
                 }),
             height: Joi.number().required()
                 .messages({
                     "number.base": `Height should be type of Number`,
-                    "any.required": `Height Weight is Required.`
+                    "any.required": `Height is Required.`
                 }),
+        }).required().messages({
+            "any.required": `Package Dimensions is Required.`
         }),
         dangerous_goods: Joi.string()
             .messages({

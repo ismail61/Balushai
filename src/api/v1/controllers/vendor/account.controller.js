@@ -1,4 +1,4 @@
-import { findVendorByIDAndUpdate, findVendorUsingID, getVendorAccountLogo, getVendorAccountPhoto, getVendorBankInfo, getVendorBusinessInfo, getVendorReturnAddress, getVendorSellerAccountInfo, getVendorWarehouseAddress, updateSellerAccountInfo, updateVendorBankInfo, updateVendorBusinessInfo, updateVendorReturnAddress, updateVendorWarehouseAddress } from "../../services/vendor";
+import { findVendorByIDAndUpdate, findVendorUsingID, getVendorAccountLogo, getVendorAccountPhoto, getVendorBankInfo, getVendorBusinessInfo, getVendorReturnAddress, getVendorSellerAccountInfo, getVendorWarehouseAddress, updateSellerAccountInfo, updateVendorAccountLogo, updateVendorAccountPhoto, updateVendorBankInfo, updateVendorBusinessInfo, updateVendorReturnAddress, updateVendorWarehouseAddress } from "../../services/vendor";
 import { error, passwordCompare, validatorEscape } from "../../utils";
 import { bankInfoValidation, businessInfoValidation, passwordValidation, returnAddressValidation, sellerAccountInfoValidation, wareHouseAddressValidation } from "../../validations";
 import validator from "validator";
@@ -39,8 +39,8 @@ function accountController() {
             //image upload if seller provide any image for document
             if (req.file) {
                 const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/documents', use_filename: true })
-                if (!image_upload?.url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500)
-                document = image_upload?.url
+                if (!image_upload?.secure_url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500)
+                document = image_upload?.secure_url
             }
 
             //malicious data refactor
@@ -65,9 +65,9 @@ function accountController() {
 
             //image upload if seller provide any image for bank cheque Book
             if (req.file) {
-                const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/documents', use_filename: true })
+                const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/bank', use_filename: true })
                 if (!image_upload?.url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500)
-                cheque_copy = image_upload?.url
+                cheque_copy = image_upload?.secure_url
             }
 
             //malicious data refactor
@@ -120,13 +120,18 @@ function accountController() {
             if (req.file?.size >= 3 * 1024 * 1024) return error().resourceError(res, 'Image size mus lower than 3 MB', 409);
 
             const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/logo', use_filename: true });
-            if (!image_upload?.url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500);
+            if (!image_upload?.secure_url) return error().resourceError(res, 'Image Uploaded Failed . Please try again', 500);
 
-            await updateVendorAccountLogo(req.user?._id, image_upload?.url);
+            await updateVendorAccountLogo({_id: req.user?._id}, {
+                logo: {
+                    public_id: image_upload?.public_id,
+                    url: image_upload?.secure_url
+                }
+            });
 
             res.status(200).json({
                 message: 'successful',
-                url: image_upload?.url
+                url: image_upload?.secure_url
             });
         },
 
@@ -140,13 +145,18 @@ function accountController() {
             if (req.file?.size >= 3 * 1024 * 1024) return error().resourceError(res, 'Image size mus lower than 3 MB', 409);
 
             const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/photo', use_filename: true });
-            if (!image_upload?.url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500);
+            if (!image_upload?.secure_url) return error().resourceError(res, 'Image Uploaded Failed . Please try again', 500);
 
-            await updateVendorAccountPhoto(req.user?._id, image_upload?.url);
+            await updateVendorAccountPhoto(req.user?._id, {
+                image: {
+                    public_id: image_upload?.public_id,
+                    url: image_upload?.secure_url
+                }
+            });
 
             res.status(200).json({
                 message: 'successful',
-                url: image_upload?.url
+                url: image_upload?.secure_url
             });
         },
 

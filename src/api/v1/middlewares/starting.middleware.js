@@ -22,6 +22,12 @@ function startingMiddleware(app) {
     app.use(mongoSanitize());
     app.use(compression());
     app.use(helmet());
+    // Use helmet to secure Express headers
+	/* app.use(helmet.xframe());
+	app.use(helmet.xssFilter());
+	app.use(helmet.nosniff());
+	app.use(helmet.ienoopen()); */
+	app.disable('x-powered-by');
     app.use(cors());
     app.use(morgan('dev'));
     app.use('/public', express.static('public'));

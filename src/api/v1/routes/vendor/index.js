@@ -1,11 +1,11 @@
-import { vendorAuthentication } from '../../middlewares/vendor';
 import { accountRoutes } from './account.routes';
 import { authRoutes } from './auth.routes.js';
+import { imageRoutes } from './image.routes';
 import { productRoutes } from './product.routes.js';
-function routes(app) {
+function VendorRoutes(app) {
     authRoutes(app);
-    app.use(vendorAuthentication);
     productRoutes(app);
     accountRoutes(app);
+    imageRoutes(app);
 }
-export { routes };
+export { VendorRoutes };

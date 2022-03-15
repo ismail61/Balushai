@@ -1,4 +1,5 @@
 
+import slugify from "slugify";
 import { addProduct, getProduct, getProducts, updateProduct, sellerSKUCheck } from "../../services/vendor";
 import { error } from '../../utils';
 import { productValidation } from '../../validations';
@@ -17,8 +18,12 @@ function productController() {
             const seller_sku_check = await sellerSKUCheck(req.body);
             if (seller_sku_check) return error().resourceError(res, 'Seller SKU Match!. Please input different seller_sku number', 422);
 
+            const { product_name } = req.body;
 
-            const newProduct = await addProduct(req.user?._id, req.body);
+            const newProduct = await addProduct(req.user?._id, {
+                ...req.body,
+                slug: slugify(product_name)
+            });
             res.status(200).json(newProduct);
         },
 
@@ -72,7 +77,7 @@ function productController() {
             res.status(200).json(deActiveProduct);
         },
 
-      
+
     }
 }
 export { productController };

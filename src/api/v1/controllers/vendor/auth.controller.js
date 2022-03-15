@@ -1,7 +1,7 @@
 import { createVendor, findVendorUsingEmail, findVendorUsingEmailOrPhoneNumber, findVendorUsingShopName } from "../../services/vendor"
 import { findVendorByIDAndUpdate } from "../../services/vendor/account.services"
 import { error, generateToken, generateTokenTracker, passwordCompare, validatorEscape } from "../../utils"
-import { signInValidation, signUpValidation } from "../../validations"
+import { signInValidation, vendorSignUpValidation } from "../../validations"
 
 function authController() {
     return {

@@ -1,6 +1,6 @@
 
 import { generatePasswordHash, generateRandomSellerId } from "../../utils";
-import { Vendor } from "../../mongodb/vendor/models";
+import { Vendor } from "../../mongodb/vendor";
 
 export const findVendorUsingEmailOrPhoneNumber = async (data) => {
     try {

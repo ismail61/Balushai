@@ -1,10 +1,20 @@
-export { signUpValidation } from './auth/signUp.validation';
-export { signInValidation } from './auth/signIn.validation';
+export { vendorSignUpValidation } from './vendor/auth/signUp.validation';
+export { signInValidation } from './common/signIn.validation';
 export { businessInfoValidation } from './vendor/account/businessInfo.validation';
 export { bankInfoValidation } from './vendor/account/bankInfo.validation';
 export { wareHouseAddressValidation } from './vendor/account/wareHouseAddress.validation';
 export { returnAddressValidation } from './vendor/account/returnAddress.validation';
 export { sellerAccountInfoValidation } from './vendor/account/sellerAccountInfo.validation';
-export { passwordValidation } from './vendor/account/password.validation';
-export {productValidation} from './vendor/product/product.validation';
-export {orderValidation} from './order/order.validation'
+export { passwordValidation } from './common/password.validation';
+export { productValidation } from './vendor/product/product.validation';
+export { orderValidation } from './common/order.validation';
+//customer
+export { customerSignUpValidation } from './customer/auth/signUp.validation'
+export {customerAccountInfoValidation} from './customer/account/sellerAccountInfo.validation'
+export {reviewValidation} from './common/review/review.validation';
+export {replyReviewValidation} from './common/review/replyReview.validation'
+export {reportReviewValidation} from './common/review/reportReview.validation'
+
+//admin
+
+export {categoryValidation} from './admin/category/category.validation'

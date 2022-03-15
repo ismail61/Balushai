@@ -186,9 +186,9 @@ const vendorSchema = new mongoose.Schema({
     },
     //seller Logo
     logo: {
-        type: String,
+        url: String,
+        public_id: String
     },
-
     password: {
         type: String,
         required: true,
@@ -220,7 +220,8 @@ const vendorSchema = new mongoose.Schema({
         }
     ],
     image: {
-        url: String
+        url: String,
+        public_id: String
     },
     /* seller_rating: { // like 90%
         type: Number,
@@ -242,6 +243,12 @@ const vendorSchema = new mongoose.Schema({
         _id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Voucher',
+        },
+    }],
+    reviews: [{
+        _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review',
         },
     }],
     campaigns: [{

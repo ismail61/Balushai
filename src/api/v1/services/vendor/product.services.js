@@ -1,4 +1,4 @@
-import { Product, Vendor } from "../../mongodb/vendor/models";
+import { Product, Vendor } from "../../mongodb/vendor";
 
 export const addProduct = async (vendor_id, data) => {
     try {
@@ -19,7 +19,7 @@ const pushVendorProducts = async (vendor_id, product_id) => {
     let productsArray = await Vendor.findOne({ _id: vendor_id }).select('products -_id') || [];
     const { products } = productsArray;
     products?.push({ _id: product_id });
-    await Vendor.findOneAndUpdate({ products });
+    await Vendor.findOneAndUpdate({ _id: vendor_id }, { products });
 }
 
 export const getProduct = async (query) => {
@@ -40,7 +40,7 @@ export const getProducts = async (query) => {
 
 export const updateProduct = async (query, data) => {
     try {
-        return await Product.findOneAndUpdate(query, { $set: data } , {new : true})
+        return await Product.findOneAndUpdate(query, { $set: data }, { new: true })
     } catch (err) {
         console.log(err)
     }
