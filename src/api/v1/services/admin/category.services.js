@@ -11,55 +11,6 @@ export const createCategory = async (data, res) => {
     }
 }
 
-// Get nested category *Recursive*
-const getNestedCategoryById = (categories, _id) => {
-    for (let category of categories) {
-        console.log(String(category._id), "=> ", String(_id))
-        if(String(category._id) == String(_id)){
-
-            return category
-
-        } else {
-            if(category.children.length != 0){
-               return getNestedCategoryById(category.children, _id)
-            }
-        }
-    }
-}
-
-// Get single category service
-export const getSingleCategory = async (_id , res) => {
-    try {
-        const categories = await Category.find({});
-        if (!categories) return [];
-
-        const allNestedCategories =  nestedCategories(categories);
-    
-        let resutl = {}
-        
-        for(let cat of allNestedCategories){
-            if(String(cat._id) === String(_id)){
-                return cat
-            } else {
-
-                if(cat.children.length !== 0){
-                    const nestedCategory = getNestedCategoryById(cat.children, _id)
-
-                    if(nestedCategories){
-                        resutl = nestedCategory
-                    }
-
-                }
-            }
-        }
-        return resutl
-
-    } catch (err) {
-        console.log(err);
-        globalErrorHandler(err, res);
-    }
-}
-
 // Get all category service
 export const getAllCategory = async (res) => {
     try {
@@ -92,22 +43,19 @@ function nestedCategories(categories, parentId = null) {
     return categoryList;
 }
 
-function singleNestedCategories(categories, parentId = null) {
+export const singleNestedCategories = async (id, res) => {
     const categoryList = [];
-    let category;
-    if (parentId == null) {
-        category = categories.filter(cat => cat.parent_id == null);
-    } else {
-        category = categories.filter(cat => String(cat.parent_id) == String(parentId));
-    }
 
-    for (let cate of category) {
+    const categories = await Category.find({});
+        if (!categories) return [];
+
+        const cate = await Category.findOne({_id: id})
         categoryList.push({
             _id: cate._id,
             name: cate.name,
             slug: cate.slug,
             children: nestedCategories(categories, cate._id)
         })
-    }
+        
     return categoryList;
 }

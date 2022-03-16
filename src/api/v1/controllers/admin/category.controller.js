@@ -1,5 +1,5 @@
 import slugify from "slugify";
-import { createCategory, getAllCategory, getSingleCategory } from "../../services/admin";
+import { createCategory, getAllCategory, singleNestedCategories } from "../../services/admin";
 import { error } from "../../utils";
 import { categoryValidation } from "../../validations";
 
@@ -28,7 +28,8 @@ const categoryController = () => {
         // Find single category by ID 
         getSingleCategory: async (req, res) => {
             // Get single category from db
-            const category = await getSingleCategory(req.params.id, res)
+            // const category = await getSingleCategory(req.params.id, res)
+            const category = await singleNestedCategories(req.params.id, res)
             res.status(200).json(category)
         },
 

@@ -1,7 +1,5 @@
 import slugify from "slugify";
-import { createCategory, getAllCategory, getSingleCategory } from "../../services/admin";
 import { error } from "../../utils";
-import { categoryValidation } from "../../validations";
 
 const brandController = () => {
     return {
