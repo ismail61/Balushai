@@ -1,7 +1,11 @@
-export { vendorAuthentication } from '../../middlewares/vendor';
-export { brandRoutes } from '../admin';
-export { accountRoutes } from './account.routes';
-export { authRoutes } from './auth.routes.js';
-export { productRoutes } from './product.routes.js';
-export { freeShippingRoutes } from './promotions/freeShipping.routes';
-export { voucherRoutes } from './promotions/voucher.routes';
+import { accountRoutes } from './account.routes';
+import { authRoutes } from './auth.routes.js';
+import { imageRoutes } from './image.routes';
+import { productRoutes } from './product.routes.js';
+function VendorRoutes(app) {
+    authRoutes(app);
+    productRoutes(app);
+    accountRoutes(app);
+    imageRoutes(app);
+}
+export { VendorRoutes };

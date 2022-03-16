@@ -1,2 +1,8 @@
-export { brandRoutes } from './brand.routes'
-export { categoryRoutes } from './category.routes'
+import { brandRoutes } from "./brand.routes";
+import { categoryRoutes } from "./category.routes";
+
+function AdminRoutes(app) {
+    categoryRoutes(app)
+    brandRoutes(app);
+}
+export { AdminRoutes };

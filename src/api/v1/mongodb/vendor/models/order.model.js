@@ -74,7 +74,7 @@ const PaymentInformationSchema = new mongoose.Schema({
 const orderSchema = new mongoose.Schema({
     product: ProductSchema,
     total_price: NumberRequired,
-    shipment_fee: NumberRequired,
+    shipping_fee: NumberRequired,
     /*  balushai_discount: {
          type: Number,
          default: 0
@@ -83,7 +83,7 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    /* shipment_fee_discount: {
+    /* shipping_fee_discount: {
         type : Number,
         default : 0
     }, */
@@ -95,7 +95,7 @@ const orderSchema = new mongoose.Schema({
         ref: 'User'
     },
     billing_address: AddressSchema,
-    shipment_address: AddressSchema,
+    shipping_address: AddressSchema,
     user_order_status: {
         type: String,
         default: 'PENDING',
@@ -126,7 +126,7 @@ const orderSchema = new mongoose.Schema({
             ref: 'Review',
         },
     },
-    refunds: Number
+    Refunds: Number
 }, {
     timestamps: true
 })

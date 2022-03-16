@@ -1,14 +1,10 @@
-import { brandRoutes, categoryRoutes } from "./admin";
-import { accountRoutes, authRoutes, freeShippingRoutes, productRoutes, vendorAuthentication, voucherRoutes } from "./vendor";
+import { AdminRoutes } from "./admin";
+import { CustomerRoutes } from "./customer";
+import { VendorRoutes } from "./vendor";
 
 function routes(app) {
-    authRoutes(app);
-    app.use(vendorAuthentication);
-    productRoutes(app);
-    accountRoutes(app);
-    freeShippingRoutes(app);
-    voucherRoutes(app);
-    brandRoutes(app);
-    categoryRoutes(app)
+    CustomerRoutes(app);
+    VendorRoutes(app);
+    AdminRoutes(app);
 }
 export { routes };

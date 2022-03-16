@@ -31,12 +31,12 @@ const freeShippingSchema = mongoose.Schema({
                 type: Date,
                 required: true
             },
-            // required: () => {
-            //     if (this.period_type === 'SPECIFIC_PERIOD') {
-            //         return true;
-            //     }
-            //     return false;
-            // }
+            required: () => {
+                if (this.period_type === 'SPECIFIC_PERIOD') {
+                    return true;
+                }
+                return false;
+            }
         },
     },
     condition: {
@@ -71,14 +71,12 @@ const freeShippingSchema = mongoose.Schema({
             default: 'ALL'
         },
         region: [{
-            name: {
-                type: String,
-                required: () => {
-                    if (this.region_type === 'SPECIFIC_REGIONS') {
-                        return true;
-                    }
-                    return false;
+            name: String,
+            required: () => {
+                if (this.region_type === 'SPECIFIC_REGIONS') {
+                    return true;
                 }
+                return false;
             }
         }]
     },

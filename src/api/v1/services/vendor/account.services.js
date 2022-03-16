@@ -1,4 +1,4 @@
-import { Vendor } from "../../mongodb/vendor/models";
+import { Vendor } from "../../mongodb/vendor";
 import { getNestedProperty } from "../../utils";
 
 export const findVendorByIDAndUpdate = async (id, data) => {
@@ -110,9 +110,9 @@ export const getVendorAccountLogo = async (data) => {
     }
 }
 
-export const updateVendorAccountLogo = async (id, url) => {
+export const updateVendorAccountLogo = async (query, data) => {
     try {
-        return await Vendor.findOneAndUpdate({ _id: id }, { logo : url }, { new: true });
+        return await Vendor.findOneAndUpdate(query, { $set : data }, { new: true });
     } catch (err) {
         console.log(err);
     }
@@ -126,9 +126,9 @@ export const getVendorAccountPhoto = async (data) => {
     }
 }
 
-export const updateVendorAccountPhoto = async (id, url) => {
+export const updateVendorAccountPhoto = async (query, data) => {
     try {
-        return await Vendor.findOneAndUpdate({ _id: id }, { image : url }, { new: true });
+        return await Vendor.findOneAndUpdate(query, { $set : data }, { new: true });
     } catch (err) {
         console.log(err);
     }

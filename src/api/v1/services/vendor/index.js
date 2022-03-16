@@ -1,6 +1,4 @@
 export * from './auth.services'
 export * from './account.services'
-export * from './order.services'
+export * from '../common/order.services'
 export * from './product.services'
-export * from './promotions/freeShipping.services'
-export * from './promotions/voucher.services'

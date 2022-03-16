@@ -5,10 +5,9 @@ const sellerAccountInfoValidation = ({ name , phone}) => {
             .messages({
                 "string.base": `Bank Name  should be a type of String`,
             }),
-        phone: Joi.string().regex(/(^(\+8801|8801|01|008801))[1|5-9]{1}(\d){8}$/).required()
+        phone: Joi.string().regex(/^(?:\+88|88)?(01[3-9]\d{8})$/)
             .messages({
-                "string.pattern.base": `Please Enter the Valid BD Phone number! `,
-                "any.required": `Phone is Required.`,
+                "string.pattern.base": `Please Enter the Valid BD Phone number! `
             }),
     })
     const { value, error } = joiSchema.validate({ name,phone }, { escapeHtml: true })
