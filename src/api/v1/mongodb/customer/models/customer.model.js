@@ -34,6 +34,25 @@ const AddressSchema = mongoose.Schema({
     }
 })
 
+const CustomerChat = new mongoose.Schema({
+    vendors: [
+        {
+            _id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Vendor',
+            },
+            messages: [
+                {
+                    _id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Message',
+                    }
+                }
+            ]
+        }
+    ]
+})
+
 const customerSchema = new mongoose.Schema({
     name: { // name means first name and last name
         type: String,
@@ -100,6 +119,7 @@ const customerSchema = new mongoose.Schema({
             ref: 'Voucher',
         },
     }],
+    chat: CustomerChat
 }, {
     toJSON: {
         transform(doc, ret) {

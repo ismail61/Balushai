@@ -1,5 +1,23 @@
 import mongoose from "mongoose";
 
+
+const CustomersMessage = new mongoose.Schema({
+
+        customer_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Customer',
+        },
+        messages: [
+            {
+                _id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Message',
+                }
+            }
+        ]
+    }, {_id: false}
+)
+
 const vendorSchema = new mongoose.Schema({
     // seller id will be auto generated like as BD2GL0LLH...
     seller_id: {
@@ -263,6 +281,7 @@ const vendorSchema = new mongoose.Schema({
             ref: 'FreeShipment',
         },
     }],
+    chat: [ CustomersMessage ]
 }, {
     toJSON: {
         transform(doc, ret) {

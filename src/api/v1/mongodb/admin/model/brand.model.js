@@ -1,5 +1,3 @@
-'use strict';
-
 import mongoose from "mongoose";
 
 var BrandSchema = new mongoose.Schema({

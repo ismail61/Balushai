@@ -43,7 +43,7 @@ function nestedCategories(categories, parentId = null) {
     return categoryList;
 }
 
-export const singleNestedCategories = async (id, res) => {
+export const singleNestedCategories = async (id) => {
     const categoryList = [];
 
     const categories = await Category.find({});
@@ -56,6 +56,6 @@ export const singleNestedCategories = async (id, res) => {
             slug: cate.slug,
             children: nestedCategories(categories, cate._id)
         })
-        
+
     return categoryList;
 }
