@@ -16,7 +16,8 @@
     "react-google-login": "^5.2.2",
     "react-native-phone-number-input": "^2.1.0",
     "react-phone-input-2": "^2.15.0",
-    "react-phone-number-input": "^3.1.46"
+    "react-phone-number-input": "^3.1.46",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.4",
