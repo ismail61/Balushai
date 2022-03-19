@@ -15,10 +15,10 @@ function authController() {
 
             //find a customer using email
             const user = await findCustomerUsingEmail({ email }, res);
-            if (!user) return error().resourceError(res, 'Invalid Credentials', 401);
+            if (!user) return error().resourceError(res, 'Invalid Credentials.', 401);
 
             const passwordMatch = await passwordCompare(password, user);
-            if (!passwordMatch) return error().resourceError(res, 'Invalid Credentials', 401);
+            if (!passwordMatch) return error().resourceError(res, 'Invalid Credentials!', 401);
 
 
             const verifyTokenTracker = await generateTokenTracker();

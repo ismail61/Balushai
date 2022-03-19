@@ -1,4 +1,4 @@
-import { findVendorByIDAndUpdate, findVendorUsingID, getVendorAccountLogo, getVendorAccountPhoto, getVendorBankInfo, getVendorBusinessInfo, getVendorChats, getVendorReturnAddress, getVendorSellerAccountInfo, getVendorWarehouseAddress, updateSellerAccountInfo, updateVendorAccountLogo, updateVendorAccountPhoto, updateVendorBankInfo, updateVendorBusinessInfo, updateVendorReturnAddress, updateVendorWarehouseAddress } from "../../services/vendor";
+import { findVendorByIDAndUpdate, findVendorUsingID, getVendorAccountLogo, getVendorAccountPhoto, getVendorBankInfo, getVendorBusinessInfo, getVendorChats, getVendorChatWithSingleCustomer, getVendorReturnAddress, getVendorSellerAccountInfo, getVendorWarehouseAddress, updateSellerAccountInfo, updateVendorAccountLogo, updateVendorAccountPhoto, updateVendorBankInfo, updateVendorBusinessInfo, updateVendorReturnAddress, updateVendorWarehouseAddress } from "../../services/vendor";
 import { error, passwordCompare, validatorEscape } from "../../utils";
 import { bankInfoValidation, businessInfoValidation, passwordValidation, returnAddressValidation, sellerAccountInfoValidation, wareHouseAddressValidation } from "../../validations";
 import validator from "validator";
@@ -176,7 +176,11 @@ function accountController() {
             res.status(200).json({ message: "Password Change Successful" });
         },
         getVendorChat: async(req, res) => {
-            const chatList =  await getVendorChats({ _id: req.params.id }, res)
+            const chatList =  await getVendorChats({ _id: req.user?._id }, res)
+            res.status(200).json(chatList)
+        },
+        getVendorChatWithSingleCustomer: async(req, res) => {
+            const chatList =  await getVendorChatWithSingleCustomer({ _id: req.user?._id }, req.params.id, res)
             res.status(200).json(chatList)
         }
 

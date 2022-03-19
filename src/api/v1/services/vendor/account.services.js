@@ -159,7 +159,6 @@ export const getVendorChats = async (query, res) => {
         const messages = await Message.find({});
         const customers = await Customer.find({})
 
-        console.log(chatList)
         const populatedChatList = []
 
         for(const customerChat of chatList) {
@@ -182,6 +181,39 @@ export const getVendorChats = async (query, res) => {
         }
 
         return populatedChatList
+    } catch (err) {
+        console.log(err)
+        globalErrorHandler(err, res);
+    }
+}
+
+export const getVendorChatWithSingleCustomer = async (query, id, res) => {
+    try {
+        const vendorChat = await Vendor.findOne(query).select("chat -_id")
+        const chatList = vendorChat.chat || []
+        const messages = await Message.find({});
+        const customers = await Customer.find({})
+
+        let populatedCustomerChat = {name: "Unknown", messages: []}
+
+        for(const customerChat of chatList) {
+            for( const customer of customers) {
+                if(String(customer._id) == String(id)){
+                    populatedCustomerChat.name = customer.name
+                }
+            }
+           
+            const customerMessages = customerChat.messages;
+            for(const customerMessage of customerMessages ) {
+                for(const message of messages) {
+                    if(String(customerMessage._id) == String(message._id)){
+                        populatedCustomerChat.messages = [...populatedCustomerChat.messages, { sender: message.sender, message: message.message, createdAt: message.createdAt }]
+                    }
+                }
+            }
+        }
+
+        return populatedCustomerChat
     } catch (err) {
         console.log(err)
         globalErrorHandler(err, res);

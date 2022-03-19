@@ -36,6 +36,7 @@ function accountRoutes(app) {
     app.patch('/vendor/change-password' ,vendorAuthentication, tryCatchHandle(accountController().changePassword))
     
     //change Password
-    app.get('/vendor/chat/:id' ,vendorAuthentication, tryCatchHandle(accountController().getVendorChat))
+    app.get('/vendor/chats' ,vendorAuthentication, tryCatchHandle(accountController().getVendorChat))
+    app.get('/vendor/chat/:id' ,vendorAuthentication, tryCatchHandle(accountController().getVendorChatWithSingleCustomer))
 }
 export { accountRoutes };

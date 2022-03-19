@@ -23,6 +23,8 @@ function authController() {
             const verifyTokenTracker = await generateTokenTracker();
             const token = generateToken(vendor, verifyTokenTracker);
 
+            console.log(req.headers)
+
             await findVendorByIDAndUpdate(vendor._id, { token: verifyTokenTracker }, res);
             res.status(200).json({ token: token });
         },
