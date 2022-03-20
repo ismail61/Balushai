@@ -30,7 +30,10 @@ function signup() {
         </section>
 
     </div>
+
   )
+
+
 }
 
 export default signup

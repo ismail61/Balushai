@@ -19,8 +19,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
+       
       <div className="max-w-2xl drop-shadow rounded-lg	mx-auto sm:px-6 lg:px-8 w-full">
+
+      
       
 
           <div className="overflow-hidden shadow-md">
@@ -28,9 +30,11 @@ export default function Home() {
                 SIGN UP
             </div>
 
+            
+
             <div className="p-6 bg-white border-b border-gray-200">
             <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-              <span className='mx-9 pt-2'>Phone Number <span className='text-red'>*</span></span>
+              <span className='mx-9 pt-2 md:w-1/3'>Phone Number <span className='text-red'>*</span></span>
             
               <div className="flex -mr-px">
                 <span className="flex items-center leading-normal bg-grey-lighter rounded rounded-r-none border border-r-0 border-grey-light px-3 whitespace-no-wrap text-grey-dark text-sm">880</span>
@@ -52,7 +56,7 @@ export default function Home() {
 
 
                   <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-                  <span className='mx-9 pt-2'>Enter Code <span className='text-red'>*</span></span>
+                  <span className='mx-9 pt-2 md:w-1/3 text-left'>Enter Code <span className='text-red'>*</span></span>
 
                   <div className="flex -mr-px">
                       <span className="flex items-center leading-normal bg-grey-lighter rounded rounded-r-none border border-r-0 border-grey-light px-3 whitespace-no-wrap text-grey-dark text-sm">880</span>
@@ -77,25 +81,25 @@ export default function Home() {
           {signup && (<div className='text-center mt-8'>
 
             <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-              <span className='mx-9 pt-2'>Password <span className='text-red'>*</span></span>
+              <span className='mx-9 pt-2 md:w-1/3 text-left'>Password <span className='text-red'>*</span></span>
             	
               <input type="text" name='phone' className="flex-shrink flex-grow leading-normal w-40 flex-1 border h-10 border-grey-light rounded rounded-l-none px-3 relative focus:border-green-400" />
             </div>	
 
             <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-              <span className='mx-9 pt-2'>Confirm Password <span className='text-red'>*</span></span>
+              <span className='mx-9 pt-2 md:w-1/3 text-left'>Confirm Password <span className='text-red'>*</span></span>
             	
               <input type="text" name='phone' className="float-right grid-cols-1 flex-shrink flex-grow leading-normal w-4 flex-1 border h-10 border-grey-light rounded rounded-l-none px-3 relative focus:border-green-400" />
             </div>	
 
             <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-              <span className='mx-9 pt-2'>Email Address <span className='text-red'>*</span></span>
+              <span className='mx-9 pt-2 md:w-1/3 text-left'>Email Address <span className='text-red'>*</span></span>
             	
               <input type="text" name='phone' className="flex-shrink float-right flex-grow leading-normal w-px flex-1 border h-10 border-grey-light rounded rounded-l-none focus:border-green-400" />
             </div>	
 
             <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-              <span className='mx-9 pt-2'>Shop Na <span className='text-red'>*</span></span>
+              <span className='mx-9 pt-2 md:w-1/3 text-left'>Shop Na <span className='text-red'>*</span></span>
             	
               <input type="text" name='phone' className="flex-shrink flex-grow float-right leading-normal w-px flex-1 border h-10 border-grey-light rounded rounded-l-none px-3 relative focus:border-green-400" />
             </div>	
