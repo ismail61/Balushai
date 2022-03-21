@@ -14,5 +14,7 @@ function accountRoutes(app) {
 
     //change Password
     app.patch('/customer/change-password' ,customerAuthentication, tryCatchHandle(accountController().changePassword))
+
+    app.get('/customer/chat/:id' ,customerAuthentication, tryCatchHandle(accountController().getCustomerChatWithSingleVendor))
 }
 export { accountRoutes };

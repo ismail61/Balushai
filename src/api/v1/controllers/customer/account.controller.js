@@ -1,6 +1,6 @@
 import { error, passwordCompare, validatorEscape } from "../../utils";
 import validator from "validator";
-import { findCustomerByIDAndUpdate, findCustomerUsingID, getCustomerAccountInfo, getCustomerAccountPhoto, updateCustomerAccountInfo, updateCustomerAccountPhoto } from "../../services/customer";
+import { findCustomerByIDAndUpdate, findCustomerUsingID, getCustomerAccountInfo, getCustomerAccountPhoto, getCustomerChatWithSingleVendor, updateCustomerAccountInfo, updateCustomerAccountPhoto } from "../../services/customer";
 import { customerAccountInfoValidation, passwordValidation } from "../../validations";
 
 function accountController() {
@@ -63,6 +63,11 @@ function accountController() {
             await findCustomerByIDAndUpdate(customer._id, { password: new_password }, res);
             res.status(200).json({ message: "Password Changed Successful" });
         },
+        getCustomerChatWithSingleVendor: async(req, res) => {
+            console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiit")
+            const chatList =  await getCustomerChatWithSingleVendor({ _id: req.user?._id }, req.params.id, res)
+            res.status(200).json(chatList)
+        }
 
     }
 }

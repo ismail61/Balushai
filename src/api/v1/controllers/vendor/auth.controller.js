@@ -16,7 +16,7 @@ function authController() {
             if (!vendor) return error().resourceError(res, 'Invalid Credentials.', 401);
 
             const passwordMatch = await passwordCompare(password, vendor);
-            console.log(passwordMatch)
+
             if (!passwordMatch) return error().resourceError(res, 'Invalid Credentials!', 401);
 
 
