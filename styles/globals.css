@@ -1,0 +1,549 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.App {
+  text-align: center;
+}
+.navBar{
+  list-style-type: none;
+  display: block; 
+}
+.navBar li{
+  float: left;
+  width: 100%;
+
+}
+.navBar li a{
+  text-decoration: none;
+  background: rebeccapurple;
+  width: 100%;
+}
+
+.carousel-control-prev {
+  left: 201px;
+}
+.c1{
+  background: #9AFFF9;
+}
+.c2{
+  background: #E5E5E5;
+}
+.c3{
+  background: #663260;
+}
+.c4{
+  background: #FFF0E9;
+}
+.c5{
+  background: #DBFFFD;
+}
+.c6{
+  background: #F7FF98;
+}
+.carousel-control-prev-icon{
+  display: none;
+}
+.carousel-control-next-icon{
+  display: none;
+}
+.carousel {
+  position: relative;
+}
+.col li:hover{
+  display: block;
+  background: #ECEFF1;
+}
+.spam{
+  margin-left: -99999px;
+}
+.col li:hover .spam{
+  margin-left: 30px;
+  
+}
+.ac:hover{
+  color: #239CB7;
+}
+.col li:hover .bc{
+  margin-left: 70px;
+  
+}
+.col li:hover .cc{
+  margin-left: 47px;
+  
+}
+.col li:hover .dc{
+  margin-left: 38px;
+  
+}
+.col li:hover .ec{
+  margin-left: 77px;
+  
+}
+.col li:hover .fc{
+  margin-left: 92px;
+  
+}
+.col li:hover .gc{
+  margin-left: 78px;
+  
+}
+.col li:hover .hc{
+  margin-left: 73px;
+  
+}
+.col li:hover .jc{
+  margin-left: 92px;
+  
+}
+.col li:hover .ic{
+  margin-left: 72px;
+  
+}
+.col li:hover .kc{
+  margin-left: 40px;
+  
+}
+.col li:hover .lc{
+  margin-left: 65px;
+  
+}
+.col li:hover .mc{
+  margin-left: 28px;
+  
+}
+.col ul li:hover ul{
+  border-left: 2px solid #DDDEE0;
+}
+.spa{
+  margin-left: -99999px;
+}
+.col li ul li:hover .za{
+  margin-left: 73px;
+}
+.col ul li ul li a{
+  color: #757575;
+}
+
+.bici{
+  display: none;
+}
+.col ul li:hover .bici{
+  display: block;
+}
+.col li ul li:hover .za{
+  margin-left: 95px; 
+}
+.col li ul li:hover .zb{
+  margin-left: 83px;
+}
+.col li ul li:hover .zc{
+  margin-left: 131px; 
+}
+.col li ul li:hover .zd{
+  margin-left: 125px; 
+}
+.col li ul li:hover .ze{
+  margin-left: 116px;  
+}
+.col li ul li:hover .zf{
+  margin-left: 70px; 
+}
+.col li ul li:hover .zg{
+  margin-left: 120px; 
+}
+.col li ul li:hover .zh{
+  margin-left: 70px; 
+}
+.col li ul li:hover .ya{
+  margin-left: 60px; 
+}
+.col li ul li:hover .yb{
+  margin-left: 135px;  
+}
+.col li ul li:hover .yc{
+  margin-left: 115px; 
+}
+.col li ul li:hover .yd{
+  margin-left: 50px; 
+}
+.col li ul li:hover .ye{
+  margin-left: 55px; 
+}
+.col li ul li:hover .yf{
+  margin-left: 40px; 
+}
+.col li ul li:hover .yg{
+  margin-left: 125px; 
+}
+.col li ul li:hover .yh{
+  margin-left: 130px;  
+}
+.col li ul li:hover .yi{
+  margin-left: 33px;  
+}
+.col li ul li:hover .yj{
+  margin-left: 44px;  
+}
+.col li ul li:hover .yk{
+  margin-left: 120px; 
+}
+.col li ul li:hover .xa{
+  margin-left: 110px; 
+}
+.col li ul li:hover .xb{
+  margin-left: 95px; 
+}
+.col li ul li:hover .xc{
+  margin-left: 1px; 
+}
+.col li ul li:hover .xd{
+  margin-left: 72px; 
+}
+.col li ul li:hover .xe{
+  margin-left: 25px; 
+}
+.col li ul li:hover .xf{
+  margin-left: 60px; 
+}
+.col li ul li:hover .xg{
+  margin-left: 147px; 
+}
+.col li ul li:hover .xh{
+  margin-left: 32px; 
+}
+.col li ul li:hover .xi{
+  margin-left: 23px; 
+}
+.col li ul li:hover .xj{
+  margin-left: 35px; 
+}
+.col li ul li:hover .wa{
+  margin-left: 97px; 
+}
+.col li ul li:hover .wb{
+  margin-left: 97px; 
+}
+.col li ul li:hover .wc{
+  margin-left: 108px; 
+}
+.col li ul li:hover .wd{
+  margin-left: 115px; 
+}
+.col li ul li:hover .we{
+  margin-left: 124px; 
+}
+.col li ul li:hover .wf{
+  margin-left: 107px; 
+}
+.col li ul li:hover .wg{
+  margin-left: 90px; 
+}
+.col li ul li:hover .wh{
+  margin-left: 115px; 
+}
+.col li ul li:hover .wi{
+  margin-left: 60px; 
+}
+.col li ul li:hover .wj{
+  margin-left: 73px; 
+}
+.col li ul li:hover .wk{
+  margin-left: 80px; 
+}
+.col li ul li:hover .va{
+  margin-left: 75px; 
+}
+.col li ul li:hover .vb{
+  margin-left: 124px; 
+}
+.col li ul li:hover .vc{
+  margin-left: 67px; 
+}
+.col li ul li:hover .vd{
+  margin-left: 112px; 
+}
+.col li ul li:hover .ve{
+  margin-left: 62px; 
+}
+.col li ul li:hover .vf{
+  margin-left: 37px; 
+}
+.col li ul li:hover .vg{
+  margin-left: 125px; 
+}
+.col li ul li:hover .vh{
+  margin-left: 95px; 
+}
+.col li ul li:hover .vi{
+  margin-left: 53px; 
+}
+.col li ul li:hover .vj{
+  margin-left: 17px; 
+}
+.col li ul li:hover .vk{
+  margin-left: 40px; 
+}
+.col li ul li:hover .vl{
+  margin-left: 60px; 
+}
+.col li ul li:hover .ua{
+  margin-left: 113px; 
+}
+.col li ul li:hover .ub{
+  margin-left: 20px; 
+}
+.col li ul li:hover .uc{
+  margin-left: 97px; 
+}
+.col li ul li:hover .ud{
+  margin-left: 55px; 
+}
+.col li ul li:hover .ue{
+  margin-left: 45px; 
+}
+.col li ul li:hover .uf{
+  margin-left: 152px; 
+}
+.col li ul li:hover .ug{
+  margin-left: 147px; 
+}
+.col li ul li:hover .uh{
+  margin-left: 148px; 
+}
+.col li ul li:hover .ui{
+  margin-left: 148px; 
+}
+.col li ul li:hover .uj{
+  margin-left: 113px; 
+}
+.col li ul li:hover .uk{
+  margin-left: 55px; 
+}
+.col li ul li:hover .ta{
+  margin-left: 144px; 
+}
+.col li ul li:hover .tb{
+  margin-left: 123px; 
+}
+.col li ul li:hover .tc{
+  margin-left: 136px; 
+}
+.col li ul li:hover .td{
+  margin-left: 120px; 
+}
+.col li ul li:hover .te{
+  margin-left: 74px; 
+}
+.col li ul li:hover .tf{
+  margin-left: 125px; 
+}
+.col li ul li:hover .tg{
+  margin-left: 55px; 
+}
+.col li ul li:hover .th{
+  margin-left: 47px; 
+}
+.col li ul li:hover .ti{
+  margin-left: 66px; 
+}
+.col li ul li:hover .tj{
+  margin-left: 43px; 
+}
+.col li ul li:hover .sa{
+  margin-left: 46px; 
+}
+.col li ul li:hover .sb{
+  margin-left: 82px;
+}
+.col li ul li:hover .sc{
+  margin-left: 133px; 
+}
+.col li ul li:hover .sd{
+  margin-left: 78px; 
+}
+.col li ul li:hover .se{
+  margin-left: 70px; 
+}
+.col li ul li:hover .sf{
+  margin-left: 138px; 
+}
+.col li ul li:hover .sg{
+  margin-left: 120px; 
+}
+.col li ul li:hover .sh{
+  margin-left: 87px; 
+}
+.col li ul li:hover .si{
+  margin-left: 134px; 
+}
+.col li ul li:hover .sj{
+  margin-left: 105px; 
+}
+.col li ul li:hover .sk{
+  margin-left: 28px; 
+}
+.col li ul li:hover .sl{
+  margin-left: 70px; 
+}
+.col li ul li:hover .ra{
+  margin-left: 80px; 
+}
+.col li ul li:hover .rb{
+  margin-left: 41px; 
+}
+.col li ul li:hover .rc{
+  margin-left: 121px; 
+}
+.col li ul li:hover .rd{
+  margin-left: 125px; 
+}
+.col li ul li:hover .re{
+  margin-left: 137px; 
+}
+.col li ul li:hover .rf{
+  margin-left: 110px; 
+}
+.col li ul li:hover .rg{
+  margin-left: 138px; 
+}
+.col li ul li:hover .rh{
+  margin-left: 145px; 
+}
+.col li ul li:hover .ri{
+  margin-left: 107px; 
+}
+.col li ul li:hover .rj{
+  margin-left: 137px; 
+}
+.col li ul li:hover .rk{
+  margin-left: 105px; 
+}
+.col li ul li:hover .rl{
+  margin-left: 121px; 
+}
+.col li ul li:hover .qa{
+  margin-left: 97px; 
+}
+.col li ul li:hover .qb{
+  margin-left: 55px; 
+}
+.col li ul li:hover .qc{
+  margin-left: 72px; 
+}
+.col li ul li:hover .qd{
+  margin-left: 92px; 
+}
+.col li ul li:hover .qe{
+  margin-left: 110px; 
+}
+.col li ul li:hover .qf{
+  margin-left: 95px; 
+}
+.col li ul li:hover .qg{
+  margin-left: 107px; 
+}
+.col li ul li:hover .qh{
+  margin-left: 110px; 
+}
+.col li ul li:hover .qi{
+  margin-left: 105px; 
+}
+.col li ul li:hover .pa{
+  margin-left: 113px; 
+}
+.col li ul li:hover .pb{
+  margin-left: 63px; 
+}
+.col li ul li:hover .pc{
+  margin-left: 110px; 
+}
+.col li ul li:hover .pd{
+  margin-left: 130px; 
+}
+.col li ul li:hover .pe{
+  margin-left: 3px; 
+}
+.col li ul li:hover .pf{
+  margin-left: 71px; 
+}
+.col li ul li:hover .pg{
+  margin-left: 58px; 
+}
+.col li ul li:hover .ph{
+  margin-left: 70px; 
+}
+.col li ul li:hover .pi{
+  margin-left: 93px; 
+}
+.col li ul li:hover .pj{
+  margin-left: 101px; 
+}
+.col li ul li:hover .pk{
+  margin-left: 65px; 
+}
+.col li ul li:hover .pl{
+  margin-left: 123px; 
+}
+.col li ul li:hover .oa{
+  margin-left: 102px; 
+}
+.col li ul li:hover .ob{
+  margin-left: 65px; 
+}
+.col li ul li:hover .oc{
+  margin-left: 60px;
+}
+.col li ul li:hover .od{
+  margin-left: 58px;
+}
+.col li ul li:hover .oe{
+  margin-left: 55px; 
+}
+.col li ul li:hover .of{
+  margin-left: 56px; 
+}
+.col li ul li:hover .og{
+  margin-left: 18px;
+}
+.col li ul li:hover .oh{
+  margin-left: 115px; 
+}
+.col li ul li:hover .oi{
+  margin-left: 107px; 
+}
+.col li ul li:hover .oj{
+  margin-left: 25px; 
+}
+.col li ul li:hover .ok{
+  margin-left: 36px; 
+}
+.cici{
+  display: none;
+}
+.col ul li ul li:hover .cici{
+  display: block;
+}
+.upper{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  height: 30px;
+}
+.upper2{
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  margin-top: -60px;
+}
