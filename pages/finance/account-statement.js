@@ -1,16 +1,17 @@
 import React from "react";
-import { SideNavigation, Product, TopNavigation } from "../../components";
+import { SideNavigation, AccountStatement, TopNavigation } from "../../components";
 
-function add_products() {
+
+function account_statement() {
   return (
     <div className="flex w-screen min-h-screen">
       <SideNavigation />
       <div className="w-full">
         <TopNavigation />
-        <Product/>
+        <AccountStatement />
       </div>
     </div>
   );
 }
 
-export default add_products;
+export default account_statement;

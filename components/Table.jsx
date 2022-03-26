@@ -69,7 +69,7 @@ function Table() {
         </thead>
         <tbody>
           {[1, 2, 3].map((product, index) => (
-            <tr>
+            <tr key={index}>
               <td>{index + 1}</td>
               <td>Nikon Camera</td>
               <td>Nikon</td>
