@@ -28,6 +28,7 @@ export default function Home() {
         <SideNavigation/>
         <div className='w-full'>
           <TopNavigation/>
+
           <Table/>
         </div>
       </div>
