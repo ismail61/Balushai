@@ -14,15 +14,15 @@ const productValidation = ({
     package_weight,
     package_dimensions,
     dangerous_goods,
-    vat,
     variant_stock_price_with_color_and_size,
     variant_stock_price_with_color,
     variant_stock_price_without_color,
 }) => {
     const joiSchema = Joi.object().keys({
-        product_name: Joi.string().required()
+        product_name: Joi.string().max(255).required()
             .messages({
                 "string.base": `Product Name should be a type of String`,
+                "string.max": `Product Name should have a maximum length of 255`,
                 "any.required": `Product Name is Required.`
             }),
         category: Joi.string().required()
@@ -63,9 +63,10 @@ const productValidation = ({
                 'string.max': `Whats in the Box should have a maximum length of 255`,
                 "any.required": `Whats in the Box is Required.`
             }),
-        warranty_type: Joi.string()
+        warranty_type: Joi.string().required()
             .messages({
-                "string.base": `Warranty Type should be type of String`
+                "string.base": `Warranty Type should be type of String`,
+                "any.required": `Warranty Type is Required.`
             }),
         warranty_period: Joi.string()
             .messages({
@@ -103,12 +104,6 @@ const productValidation = ({
             .messages({
                 "string.base": `Dangerous Goods should be type of String`
             }),
-        vat: Joi.object().keys({
-            percentage: Joi.number()
-                .messages({
-                    "number.base": `Vat should be type of Number`
-                }),
-        }),
         variant_stock_price_with_color_and_size: Joi.array()
             .items(Joi.object().keys({
                 colors: Joi.array()
@@ -244,7 +239,6 @@ const productValidation = ({
         package_weight,
         package_dimensions,
         dangerous_goods,
-        vat,
         variant_stock_price_with_color_and_size,
         variant_stock_price_with_color,
         variant_stock_price_without_color,

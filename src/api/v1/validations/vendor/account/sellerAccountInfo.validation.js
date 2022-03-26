@@ -10,6 +10,7 @@ const sellerAccountInfoValidation = ({ name , phone}) => {
                 "string.pattern.base": `Please Enter the Valid BD Phone number! `
             }),
     })
+    phone = phone?.toString();
     const { value, error } = joiSchema.validate({ name,phone }, { escapeHtml: true })
     return { value, error }
 }

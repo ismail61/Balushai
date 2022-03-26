@@ -43,6 +43,7 @@ const wareHouseAddressValidation = ({ name, address, phone, city_or_town, countr
                 "any.required": `Post Code is Required.`,
             }),
     })
+    phone = phone?.toString();
     const { value, error } = joiSchema.validate({ name, address, phone, city_or_town, country, division, city, post_code  }, { escapeHtml: true })
     return { value, error }
 }

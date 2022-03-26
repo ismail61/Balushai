@@ -1,6 +1,6 @@
 import { error } from "../..";
 
-const handleCastErrorDB = err => {
+const handleCastErrorDB = (err, res) => {
     const message = `Invalid ${err.path}:${err.value}`;
     return error().resourceError(res, message, 400);
 }
@@ -11,22 +11,23 @@ const handleDuplicateFieldsDB = (err, res) => {
     return error().resourceError(res, message, 400);
 }
 
-const handleValidationErrorDB = err => {
-    const errors = Objects.values(err.errors).map(el => {
-        el.message
-    })
-    const message = `Invalid input data. ${errors.join('. ')}`;
+const handleValidationErrorDB = (err, res) => {
+    let message;
+
+    Object.keys(err.errors).forEach((key) => {
+        message = err.errors[key].message;
+    });
     return error().resourceError(res, message, 400);
 }
 
 const sendErrorDev = (err, res) => {
     return error().resourceError(res, err.message, err.statusCode);
-/*     res.status(err.statusCode).json({
-        status: err.status,
-        error: err,
-        message: err.message,
-        stack: err.stack
-    }) */
+    /*     res.status(err.statusCode).json({
+            status: err.status,
+            error: err,
+            message: err.message,
+            stack: err.stack
+        }) */
 }
 
 const sendErrorProd = (err, res) => {

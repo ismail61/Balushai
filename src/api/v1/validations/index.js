@@ -8,13 +8,18 @@ export { sellerAccountInfoValidation } from './vendor/account/sellerAccountInfo.
 export { passwordValidation } from './common/password.validation';
 export { productValidation } from './vendor/product/product.validation';
 export { orderValidation } from './common/order.validation';
+export {phoneSignInValidation} from './vendor/auth/phone.signIn.validation'
+export {phoneNumberValidation} from './vendor/auth/phone.number.validation'
+export {phoneAndOtpValidation} from './vendor/auth/otp.validation'
 //customer
 export { customerSignUpValidation } from './customer/auth/signUp.validation'
 export {customerAccountInfoValidation} from './customer/account/sellerAccountInfo.validation'
 export {reviewValidation} from './common/review/review.validation';
 export {replyReviewValidation} from './common/review/replyReview.validation'
 export {reportReviewValidation} from './common/review/reportReview.validation'
+export {addressValidation} from './customer/account/address.validation'
 
 //admin
 
-export {categoryValidation} from './admin/category/category.validation'
+export {categoryValidation} from './admin/category.validation'
+export {brandValidation} from './admin/brand.validation'

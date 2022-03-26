@@ -1,5 +1,5 @@
 import Joi from "joi"
-const signInValidation = (email, password) => {
+const signInValidation = ({email, password}) => {
     const joiSchema = Joi.object().keys({
         email: Joi.string().lowercase()
             .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in", "co"], }, }).required()
