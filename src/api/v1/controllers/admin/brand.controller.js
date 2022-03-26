@@ -1,7 +1,7 @@
-import slugify from "slugify";
-import { createCategory, getAllCategory, getSingleCategory } from "../../services/admin";
+import validator from 'validator'
+import { createBrand, deleteBrand, getAllBrands, getBrand } from "../../services/admin";
 import { error } from "../../utils";
-import { categoryValidation } from "../../validations";
+import { brandValidation } from "../../validations";
 
 const brandController = () => {
     return {
@@ -9,15 +9,15 @@ const brandController = () => {
 
         // Create a brand
         createBrand: async (req, res) => {
-            const validation = brandValidation(req.body)
-            if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
+
+            const validation = await brandValidation(req.body);
+            //console.log(validation.error)
+            if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             const { name } = req.body;
-            const slug = slugify(name);
 
             const addedBrand = await createBrand({
-                ...req.body,
-                slug
+                name: validator.escape(name)
             })
             res.status(200).json(addedBrand);
         },
@@ -28,22 +28,21 @@ const brandController = () => {
             res.status(200).json(brands)
         },
 
-        // Update a brand
-        updateBrand: async (req, res ) => {
-            const validation = await brandValidation(req.body);
-            if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422)
-
-            const updatedBrand = await updateBrand({ _id: mongoose.Types.ObjectId(req.params.id) }, req.body)
-            res.status(200).json(updatedBrand)
+        // Get a single brand
+        getSingleBrand: async (req, res) => {
+            const brand = await getBrand({ _id: req.params?.id })
+            if (!brand) return error().resourceError(res, 'Sorry! This brand doest not exists or something wrong', 422);
+            res.status(200).json(brand)
         },
 
         // Delete a brand
         deleteBrand: async (req, res) => {
-            const deletedBrand = await deleteBrand({ _id: mongoose.Types.ObjectId(req.params.id) })
-            res.status(200).json(deleteBrand)
+            const deletedBrand = await deleteBrand({ _id: req.params?.id });
+            if (!deletedBrand) return error().resourceError(res, 'Sorry! This brand doest not exists or something wrong', 422);
+            res.status(200).json(deletedBrand)
         }
 
-     
+
     }
 }
 

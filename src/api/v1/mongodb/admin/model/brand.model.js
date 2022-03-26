@@ -8,19 +8,7 @@ var BrandSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    slug: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    description: {
-        type: String,
-        default: null
-    },
-    published: {
-        type: Boolean,
-        default: false
-    },
+    description: String,
 });
 
 export default mongoose.model('Brand', BrandSchema);

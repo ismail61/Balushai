@@ -33,10 +33,20 @@ const CategorySchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    published:{
+    published: {
         type: Boolean,
         default: true
-    }
+    },
+    commission_rate: { // like 10% but input a number like as 10
+        type: Number,
+        required: true
+    },
+    products: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+        }
+    ],
 });
 
 export default mongoose.model('Category', CategorySchema);

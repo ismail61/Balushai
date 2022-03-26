@@ -11,28 +11,6 @@ const NumberRequired = {
     type: Number,
     required: true
 }
-// Address information
-const AddressSchema = mongoose.Schema({
-    full_name: StringRequired,
-    phone_number: NumberRequired,
-    region: StringRequired,
-    city: StringRequired,
-    area: StringRequired,
-    address: StringRequired,
-    effective_delivery_label: {
-        type: String,
-        enum: ['OFFICE', 'HOME'],
-        default: 'HOME'
-    },
-    default_billing_address: {
-        type: Boolean,
-        default: false
-    },
-    default_shipping_address: {
-        type: Boolean,
-        default: false
-    }
-})
 
 const customerSchema = new mongoose.Schema({
     name: { // name means first name and last name
@@ -56,7 +34,12 @@ const customerSchema = new mongoose.Schema({
         trim: true,
     },
     //addresses 
-    address: [AddressSchema],
+    address: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Address',
+        },
+    ],
     password: {
         type: String,
         required: true,
@@ -68,19 +51,15 @@ const customerSchema = new mongoose.Schema({
     },
     orders: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Order',
-            },
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Order',
+        },
     ],
     reviews: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Review',
-            },
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review',
+        },
     ],
     image: {
         url: String,
@@ -88,17 +67,15 @@ const customerSchema = new mongoose.Schema({
     },
     followed_stores: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Vendor',
-            },
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Vendor',
+        },
     ],
     vouchers: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Voucher',
-        },
+
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Voucher',
+
     }],
 }, {
     toJSON: {

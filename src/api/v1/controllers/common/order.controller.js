@@ -47,7 +47,7 @@ const orderController = () => {
         getCustomerSingleOrder: async (req, res) => {
             //if(typeof req.params?.id !== mongoose.Types.ObjectId) return error().resourceError(res, 'Invalid Params Id', 422);
             const order = await getSingleOrder({ $and: [{ _id: mongoose.Types.ObjectId(req.params?.id) }, { user_id: req.user?._id }] });
-            if (!order) return error().resourceError(res, 'Sorry! This Order doest not exits or something wrong', 422);
+            if (!order) return error().resourceError(res, 'Sorry! This Order doest not exists or something wrong', 422);
             res.status(200).json(order)
         },
 
@@ -61,12 +61,12 @@ const orderController = () => {
         cancelOrder: async (req, res) => {
 
             const order = await getSingleOrder({ _id: mongoose.Types.ObjectId(req.params.id), user_id: req.user?._id })
-            if (!order) return error().resourceError(res, 'Sorry! This Order doest not exits or something wrong', 422);
+            if (!order) return error().resourceError(res, 'Sorry! This Order doest not exists or something wrong', 422);
 
             if (order.status !== 'PENDING') return error().resourceError(res, 'Sorry! You can not cancel this order right now', 422);
 
             const deletedOrder = await updateOrder({ _id: mongoose.Types.ObjectId(req.params.id) }, { status: 'CANCELED' })
-            if (!deletedOrder) return error().resourceError(res, 'Sorry! This Order doest not exits or something wrong', 422);
+            if (!deletedOrder) return error().resourceError(res, 'Sorry! This Order doest not exists or something wrong', 422);
 
             res.status(200).json(deletedOrder);
         }

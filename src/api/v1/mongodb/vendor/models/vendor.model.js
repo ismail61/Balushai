@@ -29,6 +29,12 @@ const vendorSchema = new mongoose.Schema({
             unique: true,
             index: true,
         },
+        slug: {
+            type: String,
+            required: true,
+            unique: true,
+            index: true,
+        },
         phone: {
             type: Number,
             required: true,
@@ -205,18 +211,14 @@ const vendorSchema = new mongoose.Schema({
     },
     products: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Product',
-            },
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
         }
     ],
     orders: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Order',
-            },
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Order'
         }
     ],
     image: {
@@ -235,33 +237,25 @@ const vendorSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    followers: {
-        type: Number,
-        default: 0
-    },
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Customer'
+    }],
     vouchers: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Voucher',
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Voucher'
     }],
     reviews: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Review',
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review'
     }],
     campaigns: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Campaign',
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Campaign',
     }],
     free_shipments: [{
-        _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'FreeShipment',
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'FreeShipment',
     }],
 }, {
     toJSON: {
@@ -275,6 +269,6 @@ const vendorSchema = new mongoose.Schema({
     timestamps: true
 });
 
-vendorSchema.index({ is_active: 1 })
+vendorSchema.index({ is_active: 1, shop_name: 1, slug: 1 })
 
 export default mongoose.model("Vendor", vendorSchema);

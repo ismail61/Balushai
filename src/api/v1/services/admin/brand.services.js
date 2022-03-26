@@ -1,34 +1,34 @@
 import { Brand } from "../../mongodb/admin";
-
 export const createBrand = async (data) => {
     try {
         const newBrand = await new Brand(data);
         return newBrand.save();
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 }
 
 export const getAllBrands = async () => {
     try {
         return await Brand.find({});
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        console.log(err)
     }
 }
 
-export const updateBrand = async (query, data) => {
+export const getBrand = async (query) => {
     try {
-        return await Brand.updateOne(query, data)
-    } catch (error) {
-        console.log(error)
+        return await Brand.findOne(query);
+    } catch (err) {
+        console.log(err)
     }
 }
+
 
 export const deleteBrand = async (query) => {
     try {
         return await Brand.deleteOne(query)
-    } catch (error) {
-        console.log(error)
+    } catch (err) {
+        console.log(err)
     }
 }

@@ -1,5 +1,5 @@
 import { createCustomerReview, replyVendorReview, reportVendorReview } from "../../services/common";
-import { error, validatorEscape } from "../../utils"
+import { error, objectValidatorEscape } from "../../utils"
 import { reportReviewValidation, reviewValidation } from "../../validations";
 import { replyReviewValidation } from "../../validations";
 import validator from "validator";
@@ -31,7 +31,7 @@ const reviewController = () => {
             //console.log(validation.error)
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
-            const refactor_data = validatorEscape(req.body);
+            const refactor_data = objectValidatorEscape(req.body);
 
             const repliedReview = await replyVendorReview({ $and: [{ _id: review_id }, { vendor_id: req.user?._id }] }, {
                 ...refactor_data,
@@ -47,7 +47,7 @@ const reviewController = () => {
             //console.log(validation.error)
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
-            const refactor_data = validatorEscape(req.body);
+            const refactor_data = objectValidatorEscape(req.body);
 
             const reportedReview = await reportVendorReview({ $and: [{ _id: review_id }, { vendor_id: req.user?._id }] }, refactor_data);
             res.status(200).json(reportedReview);

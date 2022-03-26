@@ -1,5 +1,5 @@
 import { findVendorByIDAndUpdate, findVendorUsingID, getVendorAccountLogo, getVendorAccountPhoto, getVendorBankInfo, getVendorBusinessInfo, getVendorReturnAddress, getVendorSellerAccountInfo, getVendorWarehouseAddress, updateSellerAccountInfo, updateVendorAccountLogo, updateVendorAccountPhoto, updateVendorBankInfo, updateVendorBusinessInfo, updateVendorReturnAddress, updateVendorWarehouseAddress } from "../../services/vendor";
-import { error, passwordCompare, validatorEscape } from "../../utils";
+import { error, passwordCompare, objectValidatorEscape } from "../../utils";
 import { bankInfoValidation, businessInfoValidation, passwordValidation, returnAddressValidation, sellerAccountInfoValidation, wareHouseAddressValidation } from "../../validations";
 import validator from "validator";
 
@@ -17,7 +17,7 @@ function accountController() {
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
             const updatedVendor = await updateSellerAccountInfo(req.user?._id, refactor_data);
             res.status(200).json(updatedVendor?.seller_account);
@@ -33,18 +33,18 @@ function accountController() {
             const validation = businessInfoValidation(req.body);
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
-            if (req.fileExtensionValidationError) return error().resourceError(res, 'Only .png, .jpg and .jpeg format allowed!', 415)
-            if (req.file?.size >= 3 * 1024 * 1024) return error().resourceError(res, 'Image size mus lower than 3 MB', 409)
-
             //image upload if seller provide any image for document
             if (req.file) {
+                if (req.fileExtensionValidationError) return error().resourceError(res, 'Only .png, .jpg and .jpeg format allowed!', 415)
+                if (req.file?.size >= 3 * 1024 * 1024) return error().resourceError(res, 'Image size mus lower than 3 MB', 409)
+                
                 const image_upload = await cloudinary.v2.uploader.upload(req.file?.path, { folder: 'balushai/vendor/documents', use_filename: true })
                 if (!image_upload?.secure_url) return error().resourceError(res, 'Image Saved Failed . Please try again', 500)
                 document = image_upload?.secure_url
             }
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
             const updatedVendor = await updateVendorBusinessInfo(req.user?._id, refactor_data);
             res.status(200).json(updatedVendor?.business_information);
@@ -71,7 +71,7 @@ function accountController() {
             }
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
             const updatedVendor = await updateVendorBankInfo(req.user?._id, refactor_data);
             res.status(200).json(updatedVendor?.bank_account);
@@ -88,7 +88,7 @@ function accountController() {
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
             const updatedVendor = await updateVendorWarehouseAddress(req.user?._id, refactor_data);
             res.status(200).json(updatedVendor?.warehouse_address);
@@ -105,7 +105,7 @@ function accountController() {
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
             const updatedVendor = await updateVendorReturnAddress(req.user?._id, refactor_data);
             res.status(200).json(updatedVendor?.return_address);

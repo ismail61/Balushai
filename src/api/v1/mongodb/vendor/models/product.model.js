@@ -34,6 +34,7 @@ const variant_stock_priceSchema_with_color_and_size = mongoose.Schema({
                 type: String,
                 maxLength: 100,
                 index: true,
+                unique: true
             },
             free_items: String
         }],
@@ -62,6 +63,7 @@ const variant_stock_priceSchema_with_color = mongoose.Schema({
             type: String,
             maxLength: 100,
             index: true,
+            unique: true
         },
         free_items: String,
     }],
@@ -84,6 +86,7 @@ const variant_stock_priceSchema_without_color = mongoose.Schema({
         type: String,
         maxLength: 100,
         index: true,
+        unique: true
     },
     free_items: String
 }, { _id: false })
@@ -94,6 +97,9 @@ const variant_stock_priceSchema_without_color = mongoose.Schema({
 const productSchema = mongoose.Schema({
     product_name: {
         ...StringRequired,
+        min: 10,
+        maxLength: 255,
+        unique: true,
         index: true
     },
     category: {
@@ -103,7 +109,7 @@ const productSchema = mongoose.Schema({
     },
     slug: {
         ...StringRequired,
-        unique: [true, "Slug Must be unique"],
+        unique: true,
         index: true
     },
     video_url: String,
@@ -127,7 +133,7 @@ const productSchema = mongoose.Schema({
     variant_stock_price_with_color_and_size: [variant_stock_priceSchema_with_color_and_size],
     variant_stock_price_with_color: [variant_stock_priceSchema_with_color],
     variant_stock_price_without_color: [variant_stock_priceSchema_without_color],
-    warranty_type: String,
+    warranty_type: StringRequired,
     warranty_period: String,
     warranty_policy: String,
     package_weight: NumberRequired,
@@ -146,7 +152,8 @@ const productSchema = mongoose.Schema({
     status: {
         type: String,
         enum: ['APPROVED', 'PENDING', 'SUSPENDED'],
-        default: 'PENDING'
+        default: 'PENDING',
+        index: 1
     },
     suspended_reasons: String,
     is_deleted: {
@@ -159,7 +166,7 @@ const productSchema = mongoose.Schema({
         default: false,
         index: true
     },
-    average_rating: {
+    rating: {
         type: Number,
         default: 0,
         index: true
@@ -172,26 +179,20 @@ const productSchema = mongoose.Schema({
     },
     orders: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Order',
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Order',
         }
     ],
     reviews: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Review',
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Review',
         }
     ],
     questions_and_answers: [
         {
-            _id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'QA',
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'QA',
         }
     ]
 
@@ -199,7 +200,7 @@ const productSchema = mongoose.Schema({
     timestamps: true,
 })
 
-productSchema.index({ vendor_id: 1, is_deleted: 1, is_active: 1, slug: 1 })
+productSchema.index({ vendor_id: 1, is_deleted: 1, is_active: 1, slug: 1, status: 1 })
 
 
 export default mongoose.model('Product', productSchema)

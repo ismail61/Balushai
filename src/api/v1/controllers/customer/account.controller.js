@@ -1,4 +1,4 @@
-import { error, passwordCompare, validatorEscape } from "../../utils";
+import { error, passwordCompare, objectValidatorEscape } from "../../utils";
 import validator from "validator";
 import { findCustomerByIDAndUpdate, findCustomerUsingID, getCustomerAccountInfo, getCustomerAccountPhoto, updateCustomerAccountInfo, updateCustomerAccountPhoto } from "../../services/customer";
 import { customerAccountInfoValidation, passwordValidation } from "../../validations";
@@ -17,9 +17,9 @@ function accountController() {
             if (validation.error) return error().resourceError(res, validation.error?.details[0].message, 422);
 
             //malicious data refactor
-            const refactor_data = await validatorEscape(req.body);
+            const refactor_data = await objectValidatorEscape(req.body);
 
-            const updatedVendor = await updateCustomerAccountInfo({ _id: req.user?._id }, refactor_data);
+            const updatedVendor = await updateCustomerAccountInfo({ _id: req.user?._id }, refactor_data , res);
             res.status(200).json(updatedVendor);
         },
 
