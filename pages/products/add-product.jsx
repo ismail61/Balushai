@@ -1,5 +1,5 @@
 import React from "react";
-import { SideNavigation, Product, TopNavigation } from "../../components";
+import { SideNavigation, SingleProduct, TopNavigation } from "../../components";
 
 function add_products() {
   return (
@@ -7,7 +7,7 @@ function add_products() {
       <SideNavigation />
       <div className="w-full">
         <TopNavigation />
-        <Product/>
+        <SingleProduct/>
       </div>
     </div>
   );
