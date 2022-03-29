@@ -1,1 +1,0 @@
-export { messageValidation } from './message.validation'

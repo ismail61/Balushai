@@ -1,48 +1,42 @@
 {
-  "name": "vendor",
-  "version": "1.0.0",
-  "description": "An Ecommerce System",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --experimental-specifier-resolution=node ./src/index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ismail61/Balushai.git"
-  },
-  "keywords": [
-    "ecommerce"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ismail61/Balushai/issues"
-  },
-  "homepage": "https://github.com/ismail61/Balushai#readme",
+  "name": "balushai-vendor",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.2",
-    "cloudinary": "^1.28.1",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "express-mongo-sanitize": "^2.2.0",
-    "express-rate-limit": "^6.3.0",
-    "helmet": "^5.0.2",
-    "joi": "^17.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.3",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.4",
-    "slugify": "^1.6.5",
-    "uuid": "^8.3.2",
-    "validator": "^13.7.0",
-    "xss-clean": "^0.1.1"
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.5.1",
+    "@mui/material": "^5.5.3",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.15"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
