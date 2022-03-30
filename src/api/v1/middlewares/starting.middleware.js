@@ -11,9 +11,10 @@ import bodyParser from 'body-parser';
 function startingMiddleware(app) {
     const limiter = rateLimit({
         windowMs: 15 * 60 * 1000, // 15 minutes
-        max: 10000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+        max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
         standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
         legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+        message: "You exceeded 100 requests in 15 minutes limit!",
     });
 
     // Apply the rate limiting middleware to all requests
@@ -23,11 +24,11 @@ function startingMiddleware(app) {
     app.use(compression());
     app.use(helmet());
     // Use helmet to secure Express headers
-	/* app.use(helmet.xframe());
-	app.use(helmet.xssFilter());
-	app.use(helmet.nosniff());
-	app.use(helmet.ienoopen()); */
-	app.disable('x-powered-by');
+    /* app.use(helmet.xframe());
+    app.use(helmet.xssFilter());
+    app.use(helmet.nosniff());
+    app.use(helmet.ienoopen()); */
+    app.disable('x-powered-by');
     app.use(cors());
     app.use(morgan('dev'));
     app.use('/public', express.static('public'));

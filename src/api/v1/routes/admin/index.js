@@ -1,12 +1,14 @@
+import { authRoutes } from "./auth.routes";
 import { brandRoutes } from "./brand.routes";
 import { categoryRoutes } from "./category.routes";
-import { productRoutes } from "./product.routes";
-import { vendorRoutes } from "./vendor.routes";
+import { PromotionRoutes } from "./promotions";
+import { VendorControlRoutes } from "./vendor";
 
 function AdminRoutes(app) {
+    authRoutes(app);
     categoryRoutes(app)
     brandRoutes(app);
-    productRoutes(app);
-    vendorRoutes(app);
+    VendorControlRoutes(app);
+    PromotionRoutes(app);
 }
 export { AdminRoutes };

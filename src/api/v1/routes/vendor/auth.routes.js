@@ -9,7 +9,7 @@ function authRoutes(app) {
     app.post('/vendor/sign-up', tryCatchHandle(authController().signUp));
 
     //Otp 
-    app.post('/vendor/send-otp', tryCatchHandle(authController().sendOtpInPhoneNumber));
-    app.post('/vendor/verify-otp', tryCatchHandle(authController().verifyOtp));
+    /* app.post('/vendor/send-otp', tryCatchHandle(authController().sendOtpInPhoneNumber));
+    app.post('/vendor/verify-otp', tryCatchHandle(authController().verifyOtp)); */
 }
 export { authRoutes };

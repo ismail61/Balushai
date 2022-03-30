@@ -25,10 +25,6 @@ const addressSchema = new mongoose.Schema({
         enum: ['OFFICE', 'HOME'],
         default: 'HOME'
     },
-    default_billing_address: {
-        type: Boolean,
-        default: false
-    },
     default_shipping_address: {
         type: Boolean,
         default: false

@@ -8,9 +8,7 @@ function addressRoutes(app) {
     app.get('/customer/address/:id',customerAuthentication, tryCatchHandle(addressController().getSingleAddress));
     app.get('/customer/delete-address/:id',customerAuthentication, tryCatchHandle(addressController().deleteAddress));
     app.patch('/customer/address/:id',customerAuthentication, tryCatchHandle(addressController().updateAddress));
-    app.patch('/customer/set-billing-address/:id',customerAuthentication, tryCatchHandle(addressController().setDefaultBillingAddress));
     app.patch('/customer/set-shipping-address/:id',customerAuthentication, tryCatchHandle(addressController().setDefaultShippingAddress));
-    app.patch('/customer/unset-billing-address/:id',customerAuthentication, tryCatchHandle(addressController().unsetDefaultBillingAddress));
     app.patch('/customer/unset-shipping-address/:id',customerAuthentication, tryCatchHandle(addressController().unsetDefaultShippingAddress));
 }
 export { addressRoutes };

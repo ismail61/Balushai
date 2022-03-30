@@ -1,7 +1,7 @@
 import { error } from "../../utils";
 import validator from "validator";
 import { addressValidation } from "../../validations";
-import { createAddress, deleteAddress, getAllAddress, updateAddress } from "../../services/customer";
+import { createAddress, deleteAddress, getAllAddress, updateAddress, updateAddressAndCustomer } from "../../services/customer";
 
 function addressController() {
     return {
@@ -60,7 +60,7 @@ function addressController() {
             res.status(200).send(updatedAddress);
         },
 
-        // Set Billing Address by ID
+       /*  // Set Billing Address by ID
         setDefaultBillingAddress: async (req, res) => {
 
             // Update address 
@@ -82,7 +82,7 @@ function addressController() {
             if (!updatedAddress) return error().resourceError(res, 'Sorry! This Address doest not exists or something wrong', 422);
             res.status(200).send(updatedAddress);
         },
-
+ */
         // Set Shipping Address by ID
         setDefaultShippingAddress: async (req, res) => {
             // Update address 

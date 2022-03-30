@@ -74,7 +74,7 @@ const PaymentInformationSchema = new mongoose.Schema({
  * Order Schema here
  ********************/
 const orderSchema = new mongoose.Schema({
-    product: ProductSchema,
+    product: [ProductSchema],
     total_price: NumberRequired,
     shipment_fee: NumberRequired,
     /*  balushai_discount: {
