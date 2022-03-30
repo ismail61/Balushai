@@ -11,6 +11,8 @@ export { orderValidation } from './common/order.validation';
 export {phoneSignInValidation} from './vendor/auth/phone.signIn.validation'
 export {phoneNumberValidation} from './vendor/auth/phone.number.validation'
 export {phoneAndOtpValidation} from './vendor/auth/otp.validation'
+export {voucherValidation} from './vendor/Promotions/voucher.validation';
+export {freeShippingValidation} from './vendor/Promotions/freeShipping.validation'
 //customer
 export { customerSignUpValidation } from './customer/auth/signUp.validation'
 export {customerAccountInfoValidation} from './customer/account/sellerAccountInfo.validation'
@@ -22,4 +24,5 @@ export {addressValidation} from './customer/account/address.validation'
 //admin
 
 export {categoryValidation} from './admin/category.validation'
-export {brandValidation} from './admin/brand.validation'
+export {brandValidation} from './admin/brand.validation';
+export {adminSignUpValidation} from './admin/signUp.validation'
